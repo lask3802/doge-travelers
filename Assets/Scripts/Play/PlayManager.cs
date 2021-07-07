@@ -22,14 +22,19 @@ public class PlayManager : MonoBehaviour
     #endregion
 
     public DogeController MainCharacterController;
+    public GameObject CharacterRoot;
+    public GameObject CharacterPrefab;
 
+    private List<DogeController> mPreviousDoges;
     private List<List<DogeCommand>> mAllDogeCommands;
     private List<float> mAllDogeStartX;
+    private float mCurrentStartX;
 
     private int mRoundCount;
 
     private void Start()
     {
+        mPreviousDoges = new List<DogeController>();
         mAllDogeCommands = new List<List<DogeCommand>>();
         mAllDogeStartX = new List<float>();
         mRoundCount = 0;
@@ -37,18 +42,29 @@ public class PlayManager : MonoBehaviour
 
     public void StartGame()
     {
-        mAllDogeStartX.Add(0);
-        MainCharacterController.StartGame(0);
+        mCurrentStartX = mRoundCount * 2;
+        MainCharacterController.StartGame(mCurrentStartX);
+        mPreviousDoges.ForEach(c => c.Replay());
         mRoundCount++;
     }
 
     public void StopGame()
     {
-        mAllDogeCommands.Add(MainCharacterController.EndGame());
+        mPreviousDoges.ForEach(c => c.EndGame());
+        var commands = MainCharacterController.EndGame();
+        mPreviousDoges.Add(CreatePreviousDoge(commands, mCurrentStartX));
     }
 
     public void Replay()
     {
-        MainCharacterController.Replay(mAllDogeCommands[mRoundCount - 1], mAllDogeStartX[mRoundCount - 1]);
+        mPreviousDoges.ForEach(c => c.Replay());
+    }
+
+    private DogeController CreatePreviousDoge(List<DogeCommand> commands, float startX)
+    {
+        var newDoge = Instantiate(CharacterPrefab, CharacterRoot.transform, false);
+        var controller = newDoge.GetComponent<DogeController>();
+        controller.SetReplay(commands, startX);
+        return controller;
     }
 }

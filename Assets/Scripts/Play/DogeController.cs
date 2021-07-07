@@ -6,6 +6,7 @@ using UnityEngine;
 public class DogeController:MonoBehaviour
 {
     public Camera DogeCamera;
+    public GameObject CharacterBody;
     public float CameraUpperBound;
     public float CameraLowerBound;
     public float CameraLeftBound;
@@ -16,6 +17,7 @@ public class DogeController:MonoBehaviour
     public float DogeRightBound;
 
     private List<DogeCommand> mFrameCommands;
+    private float mStartX;
 
     private bool mIsPlaying;
     private bool mIsReplay;
@@ -31,7 +33,7 @@ public class DogeController:MonoBehaviour
 
     private void ResetPosition(float startX)
     {
-        DogeCamera.transform.localPosition = new Vector3(0, 0, -5);
+        if(DogeCamera != null) DogeCamera.transform.localPosition = new Vector3(0, 0, -5);
         gameObject.transform.localPosition = new Vector3(startX, 0, 0);
     }
 
@@ -50,13 +52,20 @@ public class DogeController:MonoBehaviour
         return mFrameCommands;
     }
 
-    public void Replay(List<DogeCommand> commands, float startX)
+    public void SetReplay(List<DogeCommand> commands, float startX)
     {
+        mFrameCommands = commands;
+        mStartX = startX;
+        CharacterBody.SetActive(false);
+    }
+
+    public void Replay()
+    {
+        CharacterBody.SetActive(true);
         mIsPlaying = false;
         mIsReplay = true;
         mReplayFrameCount = 0;
-        ResetPosition(startX);
-        mFrameCommands = commands;
+        ResetPosition(mStartX);
     }
 
     private void Update()
