@@ -1,5 +1,114 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-3021039136183966160
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 840a439e06374673a9115ed02deb5a54, type: 3}
+  m_Name: UINode
+  m_EditorClassIdentifier: 
+  ErrorNodeNameIsEmpty: 0
+  ErrorDuplicateNameFoundInGraph: 0
+  m_inputSockets:
+  - m_connectionMode: 1
+    m_connections: []
+    m_connectionPoints:
+    - {x: -2, y: 4}
+    - {x: 202, y: 4}
+    m_direction: 0
+    m_canBeDeleted: 0
+    m_canBeReordered: 0
+    m_curveModifier: 0
+    m_height: 24
+    m_width: 216
+    m_x: 0
+    m_y: 38
+    m_id: 4472d0f8-2fb4-4d79-ae64-2598beab0380
+    m_nodeId: ebee03a4-dea5-4e02-8f78-878122e269d0
+    m_socketName: InputSocket_0
+    m_value: '{"ButtonCategory":"General","ButtonName":"Unnamed","GameEvent":"","TimeDelay":3.0,"Trigger":0}'
+    m_valueTypeQualifiedName: Doozy.Engine.UI.Connections.UIConnection, Assembly-CSharp,
+      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_outputSockets:
+  - m_connectionMode: 0
+    m_connections:
+    - m_inputConnectionPoint: {x: 202, y: 4}
+      m_outputConnectionPoint: {x: -2, y: 4}
+      m_id: 94e3636d-ad20-4e9a-af57-c8c0c697bbc0
+      m_inputNodeId: 96350e9c-9b28-4116-9fa1-902d98fea085
+      m_inputSocketId: 677d0def-5902-496f-b83b-1d33b9d2371f
+      m_outputNodeId: ebee03a4-dea5-4e02-8f78-878122e269d0
+      m_outputSocketId: 0117e1f8-176f-44a8-8a11-1643f6d6e1c0
+    m_connectionPoints:
+    - {x: -2, y: 4}
+    - {x: 202, y: 4}
+    m_direction: 1
+    m_canBeDeleted: 1
+    m_canBeReordered: 1
+    m_curveModifier: 0
+    m_height: 24
+    m_width: 216
+    m_x: 0
+    m_y: 62
+    m_id: 0117e1f8-176f-44a8-8a11-1643f6d6e1c0
+    m_nodeId: ebee03a4-dea5-4e02-8f78-878122e269d0
+    m_socketName: OutputSocket_1
+    m_value: '{"ButtonCategory":"Doge Travelers","ButtonName":"Back to Start","GameEvent":"","TimeDelay":3.0,"Trigger":0}'
+    m_valueTypeQualifiedName: Doozy.Engine.UI.Connections.UIConnection, Assembly-CSharp,
+      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+  - m_connectionMode: 0
+    m_connections:
+    - m_inputConnectionPoint: {x: 202, y: 4}
+      m_outputConnectionPoint: {x: -2, y: 4}
+      m_id: 258fc7e0-57f4-46c4-986e-de694542982d
+      m_inputNodeId: ea6a0443-b429-4559-8939-84bb4f41cb9d
+      m_inputSocketId: 366c01ba-2e7b-428e-91eb-286629367106
+      m_outputNodeId: ebee03a4-dea5-4e02-8f78-878122e269d0
+      m_outputSocketId: 87e12153-1767-4867-823b-08f678c8fa8f
+    m_connectionPoints:
+    - {x: -2, y: 4}
+    - {x: 202, y: 4}
+    m_direction: 1
+    m_canBeDeleted: 1
+    m_canBeReordered: 1
+    m_curveModifier: 0
+    m_height: 24
+    m_width: 216
+    m_x: 0
+    m_y: 86
+    m_id: 87e12153-1767-4867-823b-08f678c8fa8f
+    m_nodeId: ebee03a4-dea5-4e02-8f78-878122e269d0
+    m_socketName: OutputSocket_0
+    m_value: '{"ButtonCategory":"Doge Travelers","ButtonName":"Retry","GameEvent":"","TimeDelay":3.0,"Trigger":0}'
+    m_valueTypeQualifiedName: Doozy.Engine.UI.Connections.UIConnection, Assembly-CSharp,
+      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_nodeType: 4
+  m_allowDuplicateNodeName: 0
+  m_allowEmptyNodeName: 0
+  m_canBeDeleted: 1
+  m_debugMode: 0
+  m_useFixedUpdate: 0
+  m_useLateUpdate: 0
+  m_useUpdate: 0
+  m_height: 152
+  m_width: 216
+  m_x: 300
+  m_y: 36
+  m_minimumInputSocketsCount: 1
+  m_minimumOutputSocketsCount: 1
+  m_graphId: 4d8e3bc0-f564-41a7-96be-a28140ce0447
+  m_id: ebee03a4-dea5-4e02-8f78-878122e269d0
+  m_name: Gamer Over
+  m_notes: 
+  m_onEnterShowViews: []
+  m_onEnterHideViews: []
+  m_onExitShowViews: []
+  m_onExitHideViews: []
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19,11 +128,12 @@ MonoBehaviour:
   - {fileID: 6922346808828285956}
   - {fileID: 3468387307638765723}
   - {fileID: 440946643520939368}
+  - {fileID: -3021039136183966160}
   m_isSubGraph: 0
   m_version: 1
   m_description: 
   m_id: 4d8e3bc0-f564-41a7-96be-a28140ce0447
-  m_lastModified: 132701242080884177
+  m_lastModified: 132701357537588172
 --- !u!114 &440946643520939368
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -40,7 +150,14 @@ MonoBehaviour:
   ErrorDuplicateNameFoundInGraph: 0
   m_inputSockets:
   - m_connectionMode: 1
-    m_connections: []
+    m_connections:
+    - m_inputConnectionPoint: {x: 202, y: 4}
+      m_outputConnectionPoint: {x: 202, y: 4}
+      m_id: b61eb946-8db0-40d6-80f3-2456cbbbb790
+      m_inputNodeId: fd3d51ca-6a27-47ed-b7f1-ad8828485c29
+      m_inputSocketId: 124ca66e-5d70-4feb-9f33-1372ce96163e
+      m_outputNodeId: ea6a0443-b429-4559-8939-84bb4f41cb9d
+      m_outputSocketId: f1ca90f4-e369-44ca-9bdf-63650aad08a2
     m_connectionPoints:
     - {x: -2, y: 4}
     - {x: 202, y: 4}
@@ -95,8 +212,8 @@ MonoBehaviour:
   m_useUpdate: 0
   m_height: 128
   m_width: 216
-  m_x: -66.58504
-  m_y: 231.11963
+  m_x: -36
+  m_y: 240
   m_minimumInputSocketsCount: 1
   m_minimumOutputSocketsCount: 1
   m_graphId: 4d8e3bc0-f564-41a7-96be-a28140ce0447
@@ -205,6 +322,13 @@ MonoBehaviour:
       m_inputSocketId: 366c01ba-2e7b-428e-91eb-286629367106
       m_outputNodeId: 6e922bc4-d614-47b5-bc0a-3b02d17e2a5e
       m_outputSocketId: 87fab793-e7ad-41cf-924b-6cbdcb5b3bcc
+    - m_inputConnectionPoint: {x: 202, y: 4}
+      m_outputConnectionPoint: {x: -2, y: 4}
+      m_id: 258fc7e0-57f4-46c4-986e-de694542982d
+      m_inputNodeId: ea6a0443-b429-4559-8939-84bb4f41cb9d
+      m_inputSocketId: 366c01ba-2e7b-428e-91eb-286629367106
+      m_outputNodeId: ebee03a4-dea5-4e02-8f78-878122e269d0
+      m_outputSocketId: 87e12153-1767-4867-823b-08f678c8fa8f
     m_connectionPoints:
     - {x: -2, y: 4}
     - {x: 202, y: 4}
@@ -224,7 +348,14 @@ MonoBehaviour:
       Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
   m_outputSockets:
   - m_connectionMode: 0
-    m_connections: []
+    m_connections:
+    - m_inputConnectionPoint: {x: 202, y: 4}
+      m_outputConnectionPoint: {x: 202, y: 4}
+      m_id: b61eb946-8db0-40d6-80f3-2456cbbbb790
+      m_inputNodeId: fd3d51ca-6a27-47ed-b7f1-ad8828485c29
+      m_inputSocketId: 124ca66e-5d70-4feb-9f33-1372ce96163e
+      m_outputNodeId: ea6a0443-b429-4559-8939-84bb4f41cb9d
+      m_outputSocketId: f1ca90f4-e369-44ca-9bdf-63650aad08a2
     m_connectionPoints:
     - {x: -2, y: 4}
     - {x: 202, y: 4}
@@ -419,6 +550,13 @@ MonoBehaviour:
       m_inputSocketId: 677d0def-5902-496f-b83b-1d33b9d2371f
       m_outputNodeId: d63e0c25-19fd-4c0a-853c-817cf02ef819
       m_outputSocketId: 81bf8bce-6a79-4c07-9b7e-64e9bf8b2010
+    - m_inputConnectionPoint: {x: 202, y: 4}
+      m_outputConnectionPoint: {x: -2, y: 4}
+      m_id: 94e3636d-ad20-4e9a-af57-c8c0c697bbc0
+      m_inputNodeId: 96350e9c-9b28-4116-9fa1-902d98fea085
+      m_inputSocketId: 677d0def-5902-496f-b83b-1d33b9d2371f
+      m_outputNodeId: ebee03a4-dea5-4e02-8f78-878122e269d0
+      m_outputSocketId: 0117e1f8-176f-44a8-8a11-1643f6d6e1c0
     m_connectionPoints:
     - {x: -2, y: 4}
     - {x: 202, y: 4}
@@ -482,6 +620,25 @@ MonoBehaviour:
     m_value: '{"ButtonCategory":"Doge Travelers","ButtonName":"Game Start","GameEvent":"","TimeDelay":3.0,"Trigger":0}'
     m_valueTypeQualifiedName: Doozy.Engine.UI.Connections.UIConnection, Assembly-CSharp,
       Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+  - m_connectionMode: 0
+    m_connections: []
+    m_connectionPoints:
+    - {x: -2, y: 4}
+    - {x: 202, y: 4}
+    m_direction: 1
+    m_canBeDeleted: 1
+    m_canBeReordered: 1
+    m_curveModifier: 0
+    m_height: 24
+    m_width: 216
+    m_x: 0
+    m_y: 110
+    m_id: 79dd2e62-b05f-4c1b-8c8a-b4b0ef9baaa7
+    m_nodeId: 96350e9c-9b28-4116-9fa1-902d98fea085
+    m_socketName: OutputSocket_2
+    m_value: '{"ButtonCategory":"Doge Travelers","ButtonName":"Quit","GameEvent":"","TimeDelay":3.0,"Trigger":0}'
+    m_valueTypeQualifiedName: Doozy.Engine.UI.Connections.UIConnection, Assembly-CSharp,
+      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
   m_nodeType: 4
   m_allowDuplicateNodeName: 0
   m_allowEmptyNodeName: 0
@@ -490,7 +647,7 @@ MonoBehaviour:
   m_useFixedUpdate: 0
   m_useLateUpdate: 0
   m_useUpdate: 0
-  m_height: 152
+  m_height: 176
   m_width: 216
   m_x: 0
   m_y: -168

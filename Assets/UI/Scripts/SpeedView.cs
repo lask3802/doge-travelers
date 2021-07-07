@@ -7,7 +7,7 @@ namespace DogeTraveler.UI
     {
         [SerializeField] private TextMeshProUGUI SpeedText;
 
-        void SetSpeed(double speed)
+        public void SetSpeed(double speed)
         {
             SpeedText.text = $"Speed: {speed:F2} km/s";
         }

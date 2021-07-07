@@ -4,6 +4,6 @@ namespace DogeTraveler.UI
 {
     public interface IDogeSpeed
     {
-        IObservable<double> DogeSpeedObservable();
+        double GetSpeed();
     }
 }
