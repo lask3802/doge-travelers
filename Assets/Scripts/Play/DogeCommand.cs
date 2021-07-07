@@ -11,10 +11,10 @@ public struct DogeCommand
 [Flags]
 public enum DogeCommandType
 {
-    None,
-    Up,
-    Down,
-    Left,
-    Right,
-    Shoot
+    None = 0,
+    Up = 1,
+    Down = 2,
+    Left = 4,
+    Right = 8,
+    Shoot = 16
 }

@@ -18,32 +18,59 @@ public class DogeController:MonoBehaviour
     private List<DogeCommand> mFrameCommands;
 
     private bool mIsPlaying;
+    private bool mIsReplay;
+    private int mReplayFrameCount;
 
     private const float SpeedConst = 0.1f;
     
     private void Start()
     {
-        DogeCamera.transform.localPosition = new Vector3(0, 0, -5);
-        gameObject.transform.localPosition = new Vector3(0, 0, 0);
         mIsPlaying = false;
+        mIsReplay = false;
     }
 
-    public void StartGame()
+    private void ResetPosition(float startX)
+    {
+        DogeCamera.transform.localPosition = new Vector3(0, 0, -5);
+        gameObject.transform.localPosition = new Vector3(startX, 0, 0);
+    }
+
+    public void StartGame(float startX)
     {
         mFrameCommands = new List<DogeCommand>();
+        ResetPosition(startX);
         mIsPlaying = true;
+        mIsReplay = false;
     }
 
     public List<DogeCommand> EndGame()
     {
         mIsPlaying = false;
+        mIsReplay = false;
         return mFrameCommands;
+    }
+
+    public void Replay(List<DogeCommand> commands, float startX)
+    {
+        mIsPlaying = false;
+        mIsReplay = true;
+        mReplayFrameCount = 0;
+        ResetPosition(startX);
+        mFrameCommands = commands;
     }
 
     private void Update()
     {
-        if (!mIsPlaying) return;
+        if (mIsPlaying)
+            PlayingUpdate();
+        if (mIsReplay)
+            ReplayUpdate();
         
+        
+    }
+
+    private void PlayingUpdate()
+    {
         var command = new DogeCommand();
         var transformDirection = InputDirection();
         var cameraPosition = DogeCamera.transform.localPosition;
@@ -83,6 +110,20 @@ public class DogeController:MonoBehaviour
         mFrameCommands.Add(command);
     }
 
+    private void ReplayUpdate()
+    {
+        if (mReplayFrameCount >= mFrameCommands.Count)
+        {
+            mIsReplay = false;
+            return;
+        }
+            
+        var command = mFrameCommands[mReplayFrameCount];
+        gameObject.transform.localPosition += DeserializeDirection(command.Type);
+
+        mReplayFrameCount++;
+    }
+
     private Vector3 InputDirection()
     {
         var direction = Vector3.zero;
@@ -114,5 +155,19 @@ public class DogeController:MonoBehaviour
         if(y < 0) type |= DogeCommandType.Down;
         if (y > 0) type |= DogeCommandType.Up;
         return type;
+    }
+
+    private Vector3 DeserializeDirection(DogeCommandType type)
+    {
+        var direction = Vector3.zero;
+        if(type.HasFlag(DogeCommandType.Up))
+            direction += Vector3.up * SpeedConst;
+        if(type.HasFlag(DogeCommandType.Down))
+            direction += Vector3.down * SpeedConst;
+        if(type.HasFlag(DogeCommandType.Left))
+            direction += Vector3.left * SpeedConst;
+        if(type.HasFlag(DogeCommandType.Right))
+            direction += Vector3.right * SpeedConst;
+        return direction;
     }
 }

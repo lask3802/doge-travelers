@@ -1,5 +1,6 @@
 ﻿
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayManager : MonoBehaviour
@@ -22,19 +23,32 @@ public class PlayManager : MonoBehaviour
 
     public DogeController MainCharacterController;
 
+    private List<List<DogeCommand>> mAllDogeCommands;
+    private List<float> mAllDogeStartX;
+
+    private int mRoundCount;
+
     private void Start()
     {
-        
+        mAllDogeCommands = new List<List<DogeCommand>>();
+        mAllDogeStartX = new List<float>();
+        mRoundCount = 0;
     }
 
     public void StartGame()
     {
-        MainCharacterController.StartGame();
+        mAllDogeStartX.Add(0);
+        MainCharacterController.StartGame(0);
+        mRoundCount++;
     }
 
     public void StopGame()
     {
-        MainCharacterController.EndGame();
+        mAllDogeCommands.Add(MainCharacterController.EndGame());
     }
-    
+
+    public void Replay()
+    {
+        MainCharacterController.Replay(mAllDogeCommands[mRoundCount - 1], mAllDogeStartX[mRoundCount - 1]);
+    }
 }
