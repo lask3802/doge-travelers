@@ -5,6 +5,6 @@
         public int FireCount;
         public int FireDuration;
         public int FireSpeed;
-        public int FireSize;
+        public float FireSize;
     }
 }

@@ -16,7 +16,8 @@ namespace Meteoroid
         private readonly Subject<float> mProgressSubject = new Subject<float>();
         private readonly Subject<float> mSpeedSubject = new Subject<float>();
 
-        private const int EndGameFrameCount = 3 * 60 * 60;
+        private const int EndGameFrameCount = (3 * 60 + 5) * 60;
+        private const int StopFireFrameCount = 3 * 60 * 60;
 
         public IObservable<Unit> MeteoroidHitTargetAsObservable()
         {
@@ -77,18 +78,29 @@ namespace Meteoroid
                 return;
             }
 
-            var speed = FrameToSecFloor(mFramePassed) / 20 + 11;
-            
-            mMeteoroidManager.SetMeteoroidPattern(new MeteoroidPattern
+            if (mFramePassed >= StopFireFrameCount)
             {
-                FireCount = FrameToSecFloor(mFramePassed) / 30 + 1,
-                FireSpeed = speed,
-                FireDuration = 2 * 60 - (FrameToSecFloor(mFramePassed) / 50) * 30,
-                FireSize = 4
-            });
+                mMeteoroidManager.SetMeteoroidPattern(new MeteoroidPattern
+                {
+                    FireDuration = int.MaxValue
+                });
+            }
+            else
+            {
+
+                var speed = FrameToSecFloor(mFramePassed) / 30 + 11;
+            
+                mMeteoroidManager.SetMeteoroidPattern(new MeteoroidPattern
+                {
+                    FireCount = FrameToSecFloor(mFramePassed) / 70 + 2,
+                    FireSpeed = speed,
+                    FireDuration = 2 * 60 - (FrameToSecFloor(mFramePassed) / 50) * 30,
+                    FireSize = 1.5f
+                });
+                mSpeedSubject.OnNext(speed);
+            }
             
             mProgressSubject.OnNext((float)mFramePassed/EndGameFrameCount);
-            mSpeedSubject.OnNext(speed);
         }
 
         private static int FrameToSecFloor(int frameCount)
