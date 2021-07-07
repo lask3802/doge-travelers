@@ -1,37 +1,61 @@
-﻿using UnityEngine;
+﻿using EasyButtons;
+using Meteoroid;
+using UniRx;
+using UnityEngine;
 
 namespace UnityTemplateProjects
 {
     public class MainBehavior : MonoBehaviour
     {
-        private MeteoroidManager mMeteoroidManager;
+        private MeteoroidPatternController mMeteoroidPatternController;
         
         private void Awake()
         {
-            mMeteoroidManager = FindObjectOfType<MeteoroidManager>();
+            mMeteoroidPatternController = FindObjectOfType<MeteoroidPatternController>();
             Application.targetFrameRate = 60;
         }
-
-        private float mCountDown;
         
         void Start()
         {
-            mCountDown = 3;
-            mMeteoroidManager.RegisterTarget();
-            Debug.Log("ready");
+            mMeteoroidPatternController.ProgressChanged()
+                .Subscribe(value => Debug.Log($"progress: {value}"))
+                .AddTo(this);
+            
+            mMeteoroidPatternController.SpeedChanged()
+                .Subscribe(value => Debug.Log($"speed: {value}"))
+                .AddTo(this);
+            
+            mMeteoroidPatternController.MeteoroidHitTargetAsObservable()
+                .Subscribe(_ => Debug.Log("<color=red>was hit!</color>"));
+
+            mMeteoroidPatternController.ProgressEndAsObservable()
+                .Subscribe(_ => Debug.Log("<color=yellow>complete!</color>"));
         }
 
-        private bool mStart;
-        
-        void Update()
+        [Button]
+        public void Pause()
         {
-            mCountDown -= Time.deltaTime;
-            if (mCountDown < 0 && !mStart)
-            {
-                Debug.Log("start!");
-                mMeteoroidManager.StartShooting(1);
-                mStart = true;
-            }
+            mMeteoroidPatternController.PatternPause();
+            Time.timeScale = 0;
+        }
+
+        [Button]
+        public void Resume()
+        {
+            mMeteoroidPatternController.PatternResume();
+            Time.timeScale = 1;
+        }
+
+        [Button]
+        public void Stop()
+        {
+            mMeteoroidPatternController.PatternStop();
+        }
+
+        [Button]
+        public void Play()
+        {
+            mMeteoroidPatternController.PatternStart(1);
         }
     }
 }
