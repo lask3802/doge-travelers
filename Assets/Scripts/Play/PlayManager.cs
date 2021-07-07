@@ -1,6 +1,8 @@
 ﻿
 using System;
 using System.Collections.Generic;
+using Meteoroid;
+using UniRx;
 using UnityEngine;
 
 public class PlayManager : MonoBehaviour
@@ -24,6 +26,7 @@ public class PlayManager : MonoBehaviour
     public DogeController MainCharacterController;
     public GameObject CharacterRoot;
     public GameObject CharacterPrefab;
+    private MeteoroidPatternController mMeteoroidPatternController;
 
     private List<DogeController> mPreviousDoges;
     private List<List<DogeCommand>> mAllDogeCommands;
@@ -34,10 +37,16 @@ public class PlayManager : MonoBehaviour
 
     private void Start()
     {
+        mMeteoroidPatternController = FindObjectOfType<MeteoroidPatternController>();
         mPreviousDoges = new List<DogeController>();
         mAllDogeCommands = new List<List<DogeCommand>>();
         mAllDogeStartX = new List<float>();
         mRoundCount = 0;
+
+        mMeteoroidPatternController.ProgressEndAsObservable()
+            .Subscribe(_ => StopGame());
+        mMeteoroidPatternController.MeteoroidHitTargetAsObservable()
+            .Subscribe(_ => StopGame());
     }
 
     public void StartGame()
@@ -45,11 +54,13 @@ public class PlayManager : MonoBehaviour
         mCurrentStartX = mRoundCount * 2;
         MainCharacterController.StartGame(mCurrentStartX);
         mPreviousDoges.ForEach(c => c.Replay());
+        mMeteoroidPatternController.PatternStart(1);
         mRoundCount++;
     }
 
     public void StopGame()
     {
+        mMeteoroidPatternController.PatternStop();
         mPreviousDoges.ForEach(c => c.EndGame());
         var commands = MainCharacterController.EndGame();
         mPreviousDoges.Add(CreatePreviousDoge(commands, mCurrentStartX));
