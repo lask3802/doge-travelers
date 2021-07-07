@@ -76,20 +76,22 @@ namespace Meteoroid
                 PatternStop();
                 return;
             }
+
+            var speed = FrameToSecFloor(mFramePassed) / 20 + 11;
             
             mMeteoroidManager.SetMeteoroidPattern(new MeteoroidPattern
             {
-                FireCount = FrameToSec(mFramePassed) / 30 + 1,
-                FireSpeed = FrameToSec(mFramePassed) / 20 + 11,
-                FireDuration = 2 * 60 - (FrameToSec(mFramePassed) / 50) * 30,
-                FireSize = 5
+                FireCount = FrameToSecFloor(mFramePassed) / 30 + 1,
+                FireSpeed = speed,
+                FireDuration = 2 * 60 - (FrameToSecFloor(mFramePassed) / 50) * 30,
+                FireSize = 4
             });
             
             mProgressSubject.OnNext((float)mFramePassed/EndGameFrameCount);
-            mSpeedSubject.OnNext(FrameToSec(mFramePassed) / 10 + 10);
+            mSpeedSubject.OnNext(speed);
         }
 
-        private int FrameToSec(int frameCount)
+        private static int FrameToSecFloor(int frameCount)
         {
             // assume 1 sec = 60 frames
 

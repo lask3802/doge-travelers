@@ -22,16 +22,16 @@ namespace UnityTemplateProjects
         private bool mRunning;
         private int mWaitFrames;
         
-        public int FireDuration = 300;
-        public float FireSpeed = 5;
+        public int FireDuration = 120;
+        public float FireSpeed = 10;
         public int FireCount = 1;
-        public float FireMeteoroidSize = 3;
+        public float FireMeteoroidSize = 5;
 
         public int FireDelay = 30;
         
         public float FirePlaneLength = 200f;
         public float FirePlaneHeight = 100f;
-        public float FirePlaneZ = 200f;
+        public float FirePlaneZ = 250f;
 
         public float PlayerPlaneLength = 20f;
         public float PlayerPlaneHeight = 20f;
@@ -123,7 +123,6 @@ namespace UnityTemplateProjects
 
             foreach (var meteoroid in removeCandidate)
             {
-                Debug.Log($"{meteoroid.name} not hit target");
                 mExistMeteoroids.Remove(meteoroid);
                 Destroy(meteoroid.gameObject);
             }

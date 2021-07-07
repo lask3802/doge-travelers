@@ -48,12 +48,12 @@ MonoBehaviour:
   MeteoroidBasic: {fileID: 5456508698824475870}
   FireDuration: 120
   FireSpeed: 10
-  FireSpeedDelta: 3
   FireCount: 1
-  FireMeteoroidSize: 4
+  FireMeteoroidSize: 5
+  FireDelay: 30
   FirePlaneLength: 200
   FirePlaneHeight: 100
-  FirePlaneZ: 200
+  FirePlaneZ: 250
   PlayerPlaneLength: 20
   PlayerPlaneHeight: 20
   PlayerPlaneZ: 0
