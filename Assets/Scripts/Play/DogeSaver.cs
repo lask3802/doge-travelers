@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using Cysharp.Threading.Tasks;
+using UniRx;
 using UnityEngine;
 
 namespace Play
@@ -18,6 +19,13 @@ namespace Play
         {
             CheckSaveDoge(this.GetCancellationTokenOnDestroy()).Forget();
             CheckClear(this.GetCancellationTokenOnDestroy()).Forget();
+            PlayManager.OnGameStart.AsObservable().Subscribe(_ =>
+            {
+                foreach (var playManagerPrevDogeController in PlayManager.PrevDogeControllers)
+                {
+                    playManagerPrevDogeController.gameObject.SetActive(true);
+                }
+            }).AddTo(this);
         }
 
         async UniTask CheckClear(CancellationToken cts)
