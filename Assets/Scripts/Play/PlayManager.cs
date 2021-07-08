@@ -1,6 +1,7 @@
 ﻿
 using System;
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using EasyButtons;
 using Meteoroid;
 using UniRx;
@@ -48,9 +49,16 @@ public class PlayManager : MonoBehaviour
         mRoundCount = 0;
 
         mMeteoroidPatternController.ProgressEndAsObservable()
-            .Subscribe(_ => StopGame());
+            .Subscribe(_ => WinGame()).AddTo(this);
         mMeteoroidPatternController.MeteoroidHitTargetAsObservable()
-            .Subscribe(_ => StopGame());
+            .Subscribe(_ => StopGame()).AddTo(this);
+        mMeteoroidPatternController.SpeedChanged()
+            .Subscribe(GameProgressManager.Instance.UpdateGamePlaySpeed).AddTo(this);
+        mMeteoroidPatternController.ProgressChanged()
+            .Subscribe(GameProgressManager.Instance.UpdateGamePlayProgress).AddTo(this);
+        GameProgressManager.Instance.GameProgressState
+            .Where(s => s == GameState.Play1 || s == GameState.Play2 || s == GameState.Play3)
+            .Subscribe(s => StartGame()).AddTo(this);
     }
 
     [Button]
@@ -63,8 +71,7 @@ public class PlayManager : MonoBehaviour
         mMeteoroidPatternController.PatternStart(1);
         mRoundCount++;
     }
-
-    [Button]
+    
     public void StopGame()
     {
         mMeteoroidPatternController.PatternStop();
@@ -72,6 +79,14 @@ public class PlayManager : MonoBehaviour
         mPreviousDoges.ForEach(c => c.EndGame());
         var commands = MainCharacterController.EndGame();
         mPreviousDoges.Add(CreatePreviousDoge(commands, mCurrentPosition));
+        GameProgressManager.Instance.OnRoundEnd(mRoundCount).Forget();
+    }
+
+    public void WinGame()
+    {
+        mMeteoroidPatternController.PatternStop();
+        mWeaponManager.StopWeapon();
+        GameProgressManager.Instance.OnWinGame(mRoundCount).Forget();
     }
 
     public void Replay()

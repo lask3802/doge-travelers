@@ -44,6 +44,8 @@ public class DogeController:MonoBehaviour
 
     public void StartGame(Vector3 startPos)
     {
+        CharacterBody.SetActive(true);
+        if (DogeCamera != null) DogeCamera.gameObject.SetActive(true);
         mFrameCommands = new List<DogeCommand>();
         ResetPosition(startPos);
         mIsPlaying = true;
@@ -54,6 +56,8 @@ public class DogeController:MonoBehaviour
     {
         mIsPlaying = false;
         mIsReplay = false;
+        CharacterBody.SetActive(false);
+        if (DogeCamera != null) DogeCamera.gameObject.SetActive(false);
         return mFrameCommands;
     }
 
