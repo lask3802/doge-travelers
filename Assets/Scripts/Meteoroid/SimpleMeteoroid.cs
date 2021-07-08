@@ -80,7 +80,7 @@ namespace UnityTemplateProjects.Meteoroid
 
         private void OnTriggerEnter(Collider other)
         {
-            // only characters are trigger, so if enter this method it should be character was hit;
+            other.GetComponentInParent<DogeController>().ShouldPlayExplode = true;
             OnCollideTargetCallBack.Invoke(this);
         }
 

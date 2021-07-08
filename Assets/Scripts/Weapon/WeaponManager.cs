@@ -19,6 +19,9 @@ namespace UnityTemplateProjects.Weapon
         private bool mMainGunAvailable;
         private bool mMainLaserAvailable;
 
+        private Vector3 mLaserLockedPosition;
+        private bool mLaserLocked;
+
         private readonly HashSet<LaserHolder> mRegisteredLaserHolders = new HashSet<LaserHolder>();
 
         void Awake()
@@ -161,24 +164,26 @@ namespace UnityTemplateProjects.Weapon
 
             if (Input.GetMouseButton(1))
             {
-                var target = GetLaserEndPointFromMouseClick();
                 mLaserHolder = MainLaserHolder;
-                LaserFire(target);
+                if (mLaserLocked)
+                {
+                    LaserFire(mLaserLockedPosition);
+                }
+                else
+                {
+                    var target = GetTargetFromMouseClick();
+                    LaserFire(target);
+                    mLaserLockedPosition = target;
+                    mLaserLocked = true;
+                }
             }
 
             if (Input.GetMouseButtonUp(1))
             {
                 mLaserHolder = MainLaserHolder;
                 LaserEnd();
+                mLaserLocked = false;
             }
-        }
-
-        private Vector3 GetLaserEndPointFromMouseClick()
-        {
-            var camera = DogeCamera;
-            var mouse = Input.mousePosition;
-            mouse.z = 300;
-            return camera.ScreenToWorldPoint(mouse);
         }
     }
 }
