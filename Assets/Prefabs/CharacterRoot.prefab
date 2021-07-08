@@ -94,6 +94,7 @@ Transform:
   m_Children:
   - {fileID: 16636962146149171}
   - {fileID: 642151690560627786}
+  - {fileID: 9018237277134486286}
   m_Father: {fileID: 642151689429119544}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -111,6 +112,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DogeCamera: {fileID: 642151690560627790}
   CharacterBody: {fileID: 16636962146149170}
+  ExplodeEffect: {fileID: 2927080901121815739}
   CameraUpperBound: 1.5
   CameraLowerBound: -5.7
   CameraLeftBound: -6.6
@@ -594,6 +596,77 @@ GameObject:
 Transform:
   m_CorrespondingSourceObject: {fileID: 5312218918003687930, guid: c2a40542e725e1749a46758eb8e35529, type: 3}
   m_PrefabInstance: {fileID: 5453853879289566355}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &5638551415501484582
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 16636963393645140}
+    m_Modifications:
+    - target: {fileID: 3703964018566007080, guid: 2cf06f9e726405c4ab6c2aacdc8dd3e5, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3703964018566007080, guid: 2cf06f9e726405c4ab6c2aacdc8dd3e5, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.36
+      objectReference: {fileID: 0}
+    - target: {fileID: 3703964018566007080, guid: 2cf06f9e726405c4ab6c2aacdc8dd3e5, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -2.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 3703964018566007080, guid: 2cf06f9e726405c4ab6c2aacdc8dd3e5, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 7.57
+      objectReference: {fileID: 0}
+    - target: {fileID: 3703964018566007080, guid: 2cf06f9e726405c4ab6c2aacdc8dd3e5, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3703964018566007080, guid: 2cf06f9e726405c4ab6c2aacdc8dd3e5, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3703964018566007080, guid: 2cf06f9e726405c4ab6c2aacdc8dd3e5, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3703964018566007080, guid: 2cf06f9e726405c4ab6c2aacdc8dd3e5, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3703964018566007080, guid: 2cf06f9e726405c4ab6c2aacdc8dd3e5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3703964018566007080, guid: 2cf06f9e726405c4ab6c2aacdc8dd3e5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3703964018566007080, guid: 2cf06f9e726405c4ab6c2aacdc8dd3e5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7412709694513333917, guid: 2cf06f9e726405c4ab6c2aacdc8dd3e5, type: 3}
+      propertyPath: m_Name
+      value: RocketBreakEffect
+      objectReference: {fileID: 0}
+    - target: {fileID: 7412709694513333917, guid: 2cf06f9e726405c4ab6c2aacdc8dd3e5, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 2cf06f9e726405c4ab6c2aacdc8dd3e5, type: 3}
+--- !u!1 &2927080901121815739 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7412709694513333917, guid: 2cf06f9e726405c4ab6c2aacdc8dd3e5, type: 3}
+  m_PrefabInstance: {fileID: 5638551415501484582}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &9018237277134486286 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3703964018566007080, guid: 2cf06f9e726405c4ab6c2aacdc8dd3e5, type: 3}
+  m_PrefabInstance: {fileID: 5638551415501484582}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5784542180892849447
 PrefabInstance:

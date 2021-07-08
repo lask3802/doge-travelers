@@ -50,7 +50,15 @@ public class PlayManager : MonoBehaviour
         mMeteoroidPatternController.ProgressEndAsObservable()
             .Subscribe(_ => StopGame());
         mMeteoroidPatternController.MeteoroidHitTargetAsObservable()
-            .Subscribe(_ => StopGame());
+            .Subscribe(_ =>
+            {
+                MainCharacterController.ExplodeCharacter().Forget();
+                foreach (var dogeController in mPreviousDoges)
+                {
+                    dogeController.ExplodeCharacter().Forget();
+                }
+                StopGame();
+            });
     }
 
     [Button]
