@@ -18,40 +18,40 @@ MonoBehaviour:
     FireDuration: 0
     FireArriveTime: 0
   - Time: 5
-    FireCount: 2
+    FireCount: 1
     FireDuration: 1.5
     FireArriveTime: 5
   - Time: 20
-    FireCount: 2
+    FireCount: 1
     FireDuration: 1.2
     FireArriveTime: 4
   - Time: 40
-    FireCount: 3
+    FireCount: 1
     FireDuration: 1
     FireArriveTime: 3.5
   - Time: 60
-    FireCount: 3
+    FireCount: 1
     FireDuration: 0.8
     FireArriveTime: 3
   - Time: 80
-    FireCount: 4
-    FireDuration: 0.8
+    FireCount: 1
+    FireDuration: 0.7
     FireArriveTime: 2.5
   - Time: 100
-    FireCount: 4
-    FireDuration: 0.8
+    FireCount: 1
+    FireDuration: 0.6
     FireArriveTime: 2
   - Time: 120
-    FireCount: 3
-    FireDuration: 0.4
+    FireCount: 1
+    FireDuration: 0.5
     FireArriveTime: 1.5
   - Time: 140
-    FireCount: 3
-    FireDuration: 0.3
+    FireCount: 2
+    FireDuration: 0.5
     FireArriveTime: 1
   - Time: 160
     FireCount: 3
-    FireDuration: 0.2
+    FireDuration: 0.5
     FireArriveTime: 1
   - Time: 180
     FireCount: 0
