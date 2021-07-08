@@ -672,6 +672,28 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 642151689429119547, guid: f0a6983adc9ec814998dd755c7134b90, type: 3}
   m_PrefabInstance: {fileID: 642151689988845578}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1721306671 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 642151690560627765, guid: f0a6983adc9ec814998dd755c7134b90, type: 3}
+  m_PrefabInstance: {fileID: 642151689988845578}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1721306672
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1721306671}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 172515602e62fb746b5d573b38a5fe58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isGlobal: 1
+  priority: 0
+  blendDistance: 0
+  weight: 1
+  sharedProfile: {fileID: 11400000, guid: 6b18d8d35732c5249bba58ba3e0b4521, type: 2}
 --- !u!1 &1770461509
 GameObject:
   m_ObjectHideFlags: 0
@@ -741,6 +763,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Speedlines
       objectReference: {fileID: 0}
+    - target: {fileID: 5290974921550014266, guid: e49f9ea92ae4efe4bbe11e3c03e57760, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5290974921550014267, guid: e49f9ea92ae4efe4bbe11e3c03e57760, type: 3}
       propertyPath: m_RootOrder
       value: 10
@@ -787,6 +813,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e49f9ea92ae4efe4bbe11e3c03e57760, type: 3}
+--- !u!1 &1867263891 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5290974921550014266, guid: e49f9ea92ae4efe4bbe11e3c03e57760, type: 3}
+  m_PrefabInstance: {fileID: 1867263890}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1887585706
 GameObject:
   m_ObjectHideFlags: 3
@@ -977,6 +1008,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CharacterRoot
       objectReference: {fileID: 0}
+    - target: {fileID: 642151690560627784, guid: f0a6983adc9ec814998dd755c7134b90, type: 3}
+      propertyPath: m_RenderPostProcessing
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 642151690560627790, guid: f0a6983adc9ec814998dd755c7134b90, type: 3}
       propertyPath: m_Depth
       value: -2
@@ -994,6 +1029,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayManager
       objectReference: {fileID: 0}
+    - target: {fileID: 2521239816143526741, guid: 5fc622aa7271eb14da2b1886e01e4de4, type: 3}
+      propertyPath: Speedline
+      value: 
+      objectReference: {fileID: 1867263891}
     - target: {fileID: 2521239816143526741, guid: 5fc622aa7271eb14da2b1886e01e4de4, type: 3}
       propertyPath: CharacterRoot
       value: 
