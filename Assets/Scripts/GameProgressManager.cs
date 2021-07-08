@@ -102,7 +102,9 @@ public class GameProgressManager:MonoBehaviour
         await SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive);
         var director = FindObjectOfType<PlayableDirector>();
         director.Play();
-        await UniTask.WaitUntil(()=>director.state != PlayState.Playing, PlayerLoopTiming.Update, director.GetCancellationTokenOnDestroy());
+        await UniTask.Delay(TimeSpan.FromSeconds(director.duration) );
+        //await UniTask.WaitUntil(()=>director.state != PlayState.Playing, PlayerLoopTiming.Update, director.GetCancellationTokenOnDestroy());
+        Debug.Log($"{sceneName} Director play done");
         await SceneManager.UnloadSceneAsync(sceneName);
     }
 }
