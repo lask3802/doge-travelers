@@ -7,6 +7,8 @@ namespace UnityTemplateProjects.Weapon
 {
     public class WeaponManager : MonoBehaviour
     {
+        public Camera DogeCamera;
+        
         private List<SimpleBullet> mFiredBullet = new List<SimpleBullet>();
         private MeteoroidManager mMeteoroidManager;
         private GunHolder mGunHolder;
@@ -66,7 +68,7 @@ namespace UnityTemplateProjects.Weapon
 
         public Vector3 GetTargetFromMouseClick()
         {
-            var camera = Camera.main;
+            var camera = DogeCamera;
             
             var ray = camera.ScreenPointToRay(Input.mousePosition);
         

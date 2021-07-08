@@ -9,7 +9,7 @@ namespace UnityTemplateProjects
         private void Update()
         {
             
-            if (Input.GetKey(KeyCode.W) && transform.position.y < 20)
+            /*if (Input.GetKey(KeyCode.W) && transform.position.y < 20)
             {
                 transform.position += Vector3.up / 2;
             }
@@ -24,7 +24,7 @@ namespace UnityTemplateProjects
             if (Input.GetKey(KeyCode.D) && transform.position.x < 20)
             {
                 transform.position += Vector3.right / 2;
-            }
+            }*/
             
         }
 

@@ -5,6 +5,7 @@ using EasyButtons;
 using Meteoroid;
 using UniRx;
 using UnityEngine;
+using UnityTemplateProjects.Weapon;
 
 public class PlayManager : MonoBehaviour
 {
@@ -28,6 +29,7 @@ public class PlayManager : MonoBehaviour
     public GameObject CharacterRoot;
     public GameObject CharacterPrefab;
     private MeteoroidPatternController mMeteoroidPatternController;
+    private WeaponManager mWeaponManager;
 
     private List<DogeController> mPreviousDoges;
     private List<List<DogeCommand>> mAllDogeCommands;
@@ -39,6 +41,7 @@ public class PlayManager : MonoBehaviour
     private void Start()
     {
         mMeteoroidPatternController = FindObjectOfType<MeteoroidPatternController>();
+        mWeaponManager = FindObjectOfType<WeaponManager>();
         mPreviousDoges = new List<DogeController>();
         mAllDogeCommands = new List<List<DogeCommand>>();
         mAllDogeStartX = new List<float>();
@@ -55,6 +58,7 @@ public class PlayManager : MonoBehaviour
     {
         mCurrentPosition = new Vector3(0, 0, mRoundCount*-5);
         MainCharacterController.StartGame(mCurrentPosition);
+        mWeaponManager.RunWeapon();
         mPreviousDoges.ForEach(c => c.Replay());
         mMeteoroidPatternController.PatternStart(1);
         mRoundCount++;
@@ -64,6 +68,7 @@ public class PlayManager : MonoBehaviour
     public void StopGame()
     {
         mMeteoroidPatternController.PatternStop();
+        mWeaponManager.StopWeapon();
         mPreviousDoges.ForEach(c => c.EndGame());
         var commands = MainCharacterController.EndGame();
         mPreviousDoges.Add(CreatePreviousDoge(commands, mCurrentPosition));
