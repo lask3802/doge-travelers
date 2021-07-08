@@ -9,11 +9,17 @@ namespace UnityTemplateProjects.Weapon
     {
         public Camera DogeCamera;
         public GunHolder MainGunHolder;
+        public LaserHolder MainLaserHolder;
         
         private List<SimpleBullet> mFiredBullet = new List<SimpleBullet>();
         private MeteoroidManager mMeteoroidManager;
         private GunHolder mGunHolder;
+        private LaserHolder mLaserHolder;
         private bool mRunning;
+        private bool mMainGunAvailable;
+        private bool mMainLaserAvailable;
+
+        private readonly HashSet<LaserHolder> mRegisteredLaserHolders = new HashSet<LaserHolder>();
 
         void Awake()
         {
@@ -26,6 +32,25 @@ namespace UnityTemplateProjects.Weapon
             mGunHolder = gunHolder;
         }
 
+        public void RegisterLaserHolder(LaserHolder laserHolder)
+        {
+            mLaserHolder = laserHolder;
+            if (!mRegisteredLaserHolders.Contains(laserHolder))
+            {
+                mRegisteredLaserHolders.Add(laserHolder);
+            }
+        }
+
+        public void SetMainGunAvailable()
+        {
+            mMainGunAvailable = true;
+        }
+
+        public void SetMainLaserAvailable()
+        {
+            mMainLaserAvailable = true;
+        }
+
         public void RunWeapon()
         {
             mRunning = true;
@@ -34,6 +59,17 @@ namespace UnityTemplateProjects.Weapon
         public void StopWeapon()
         {
             mRunning = false;
+            foreach (var bullet in mFiredBullet)
+            {
+                Destroy(bullet.gameObject);
+            }
+            mFiredBullet.Clear();
+            MainLaserHolder.LaserEnd();
+            foreach (var laserHolder in mRegisteredLaserHolders)
+            {
+                laserHolder.LaserEnd();
+            }
+            mRegisteredLaserHolders.Clear();
         }
 
         public void GunFire(Vector3 position)
@@ -41,6 +77,21 @@ namespace UnityTemplateProjects.Weapon
             var bullet = mGunHolder.FireToTarget(position);
             bullet.OnHitMeteoroidCallback += BulletHitMeteoroid;
             mFiredBullet.Add(bullet);
+        }
+
+        public void LaserFire(Vector3 position)
+        {
+            mLaserHolder.FireToTarget(position);
+        }
+
+        public void LaserBegin()
+        {
+            mLaserHolder.LaserBegin();
+        }
+
+        public void LaserEnd()
+        {
+            mLaserHolder.LaserEnd();
         }
 
         private void BulletHitMeteoroid(SimpleMeteoroid meteoroid, SimpleBullet bullet)
@@ -60,6 +111,19 @@ namespace UnityTemplateProjects.Weapon
                 Destroy(bullet.gameObject);
             }
 
+            if (mMainGunAvailable)
+            {
+                GunInputProcess();
+            }
+
+            if (mMainLaserAvailable)
+            {
+                LaserInputProcess();
+            }
+        }
+
+        private void GunInputProcess()
+        {
             if (Input.GetMouseButtonDown(0))
             {
                 var target = GetTargetFromMouseClick();
@@ -68,7 +132,7 @@ namespace UnityTemplateProjects.Weapon
             }
         }
 
-        public Vector3 GetTargetFromMouseClick()
+        private Vector3 GetTargetFromMouseClick()
         {
             var camera = DogeCamera;
             
@@ -84,6 +148,36 @@ namespace UnityTemplateProjects.Weapon
             }
             var mouse = Input.mousePosition;
             mouse.z = 200;
+            return camera.ScreenToWorldPoint(mouse);
+        }
+
+        private void LaserInputProcess()
+        {
+            if (Input.GetMouseButtonDown(1))
+            {
+                mLaserHolder = MainLaserHolder;
+                LaserBegin();
+            }
+
+            if (Input.GetMouseButton(1))
+            {
+                var target = GetLaserEndPointFromMouseClick();
+                mLaserHolder = MainLaserHolder;
+                LaserFire(target);
+            }
+
+            if (Input.GetMouseButtonUp(1))
+            {
+                mLaserHolder = MainLaserHolder;
+                LaserEnd();
+            }
+        }
+
+        private Vector3 GetLaserEndPointFromMouseClick()
+        {
+            var camera = DogeCamera;
+            var mouse = Input.mousePosition;
+            mouse.z = 300;
             return camera.ScreenToWorldPoint(mouse);
         }
     }
