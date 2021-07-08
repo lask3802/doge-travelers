@@ -34,7 +34,7 @@ namespace DogeTraveler
             await button.Button.OnClickAsync();
             var director = FindObjectOfType<PlayableDirector>();
             director.Play();
-            await UniTask.WaitUntil(()=>director.state != PlayState.Playing);
+            await UniTask.WaitUntil(()=>director.state != PlayState.Playing, PlayerLoopTiming.Update, director.GetCancellationTokenOnDestroy());
             await SceneManager.LoadSceneAsync("main", LoadSceneMode.Additive);
             await SceneManager.UnloadSceneAsync("start");
             await SceneManager.UnloadSceneAsync("intro_1");
