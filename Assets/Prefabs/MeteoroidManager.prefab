@@ -127,6 +127,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mMeteoroidManager: {fileID: 5456508696989690963}
   mPatternSerialized: {fileID: 11400000, guid: 82370b6b3c9e619418fa2e896fb7ed72, type: 2}
+  mSpeedLinearTable: {fileID: 11400000, guid: bebd63bfbc6ba164181f852d09b450b6, type: 2}
 --- !u!64 &1649519788
 MeshCollider:
   m_ObjectHideFlags: 0

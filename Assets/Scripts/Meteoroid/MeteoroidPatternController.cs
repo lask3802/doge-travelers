@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using DefaultNamespace;
 using UniRx;
 using UnityEngine;
 using UnityTemplateProjects;
@@ -13,6 +14,9 @@ namespace Meteoroid
 
         [SerializeField] 
         private MeteoroidPatternSerialized mPatternSerialized;
+
+        [SerializeField]
+        private SpeedLinearTable mSpeedLinearTable;
         
         private bool mRunning;
         private int mFramePassed;
@@ -22,9 +26,6 @@ namespace Meteoroid
         private readonly Subject<float> mSpeedSubject = new Subject<float>();
         
         private const int FramesOneSec = 60;
-
-        private const int EndGameFrameCount = (3 * 60 + 5) * FramesOneSec;
-        private const int StopFireFrameCount = 3 * 60 * FramesOneSec;
 
         private int mStopFireFrameCount;
         private int mEndGameFrameCount;
@@ -104,18 +105,30 @@ namespace Meteoroid
             }
             
             mMeteoroidManager.SetMeteoroidPattern(pattern);
-            mSpeedSubject.OnNext(300000f / pattern.FireArriveTime);
-            mProgressSubject.OnNext((float)mFramePassed/EndGameFrameCount);
+            SetSpeedHappyGauge();
+            mProgressSubject.OnNext((float)mFramePassed/mEndGameFrameCount);
         }
 
-        private bool IsInTimeRangeSecond(int start, int end)
+        private void SetSpeedHappyGauge()
         {
-            return FrameToSecFloor(mFramePassed) >= start && FrameToSecFloor(mFramePassed) < end;
-        }
-
-        private static int FrameToSecFloor(int frameCount)
-        {
-            return frameCount / FramesOneSec;
+            var currentTime = mFramePassed / (float)FramesOneSec;
+            var elements = mSpeedLinearTable.Elements;
+            if (currentTime >= elements.Last().Time)
+            {
+                mSpeedSubject.OnNext(elements.Last().SpeedAtTime);
+                return;
+            }
+            
+            for (var i = 0; i < elements.Count; i++)
+            {
+                if (currentTime >= elements[i].Time && currentTime <= elements[i + 1].Time)
+                {
+                    var speed = elements[i].SpeedAtTime
+                                + (elements[i + 1].SpeedAtTime - elements[i].SpeedAtTime)
+                                * ((currentTime - elements[i].Time) / (elements[i + 1].Time - elements[i].Time));
+                    mSpeedSubject.OnNext(speed);
+                }
+            }
         }
     }
 }
