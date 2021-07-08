@@ -8,6 +8,7 @@ namespace UnityTemplateProjects.Weapon
     public class WeaponManager : MonoBehaviour
     {
         public Camera DogeCamera;
+        public GunHolder MainGunHolder;
         
         private List<SimpleBullet> mFiredBullet = new List<SimpleBullet>();
         private MeteoroidManager mMeteoroidManager;
@@ -62,6 +63,7 @@ namespace UnityTemplateProjects.Weapon
             if (Input.GetMouseButtonDown(0))
             {
                 var target = GetTargetFromMouseClick();
+                mGunHolder = MainGunHolder;
                 GunFire(target);
             }
         }

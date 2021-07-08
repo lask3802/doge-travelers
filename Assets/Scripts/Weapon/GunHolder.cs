@@ -10,10 +10,13 @@ namespace UnityTemplateProjects.Weapon
         public AudioSource AudioSource;
         
         private WeaponManager mWeaponManager;
+        private DogeController mDogeController;
         
         void Awake()
         {
             mWeaponManager = FindObjectOfType<WeaponManager>();
+            mDogeController = GetComponentInParent<DogeController>();
+            Bullet = mWeaponManager.GetComponentInChildren<SimpleBullet>();
         }
 
         public SimpleBullet FireToTarget(Vector3 position)
@@ -24,6 +27,7 @@ namespace UnityTemplateProjects.Weapon
             bullet.SetSpeed(FireSpeed);
             bullet.Fire();
             AudioSource.Play();
+            mDogeController.RecordGunFire(position);
             return bullet;
         }
     }

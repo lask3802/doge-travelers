@@ -1,7 +1,9 @@
 ﻿
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using UnityTemplateProjects.Weapon;
 
 public class DogeController:MonoBehaviour
 {
@@ -18,6 +20,8 @@ public class DogeController:MonoBehaviour
 
     private List<DogeCommand> mFrameCommands;
     private Vector3 mStartPos;
+    private WeaponManager mWeaponManager;
+    public GunHolder GunHolder;
 
     private bool mIsPlaying;
     private bool mIsReplay;
@@ -29,6 +33,7 @@ public class DogeController:MonoBehaviour
     {
         mIsPlaying = false;
         mIsReplay = false;
+        mWeaponManager = FindObjectOfType<WeaponManager>();
     }
 
     private void ResetPosition(Vector3 start)
@@ -108,15 +113,18 @@ public class DogeController:MonoBehaviour
                 transformDirection.y < 0 ? DogeCommandType.Down : DogeCommandType.None;
         }
 
-        if (Input.GetMouseButtonUp(0))
-        {
-            var mouseViewport = DogeCamera.ScreenToViewportPoint(Input.mousePosition);
-            Debug.Log(mouseViewport.x + " " + mouseViewport.y);
-            command.ShootingX = mouseViewport.x;
-            command.ShootingY = mouseViewport.y;
-        }
-        
         mFrameCommands.Add(command);
+    }
+
+    public void RecordGunFire(Vector3 vector)
+    {
+        if (mIsReplay) return;
+        var index = mFrameCommands.Count - 1;
+        mFrameCommands[index] = new DogeCommand
+        {
+            Type = mFrameCommands[index].Type | DogeCommandType.Shoot,
+            ShootEndPoint = vector
+        };
     }
 
     private void ReplayUpdate()
@@ -129,6 +137,13 @@ public class DogeController:MonoBehaviour
             
         var command = mFrameCommands[mReplayFrameCount];
         gameObject.transform.localPosition += DeserializeDirection(command.Type);
+
+        if (command.Type.HasFlag(DogeCommandType.Shoot))
+        {
+            mWeaponManager.RegisterGunHolder(GunHolder);
+            mWeaponManager.GunFire(command.ShootEndPoint);
+        }
+            
 
         mReplayFrameCount++;
     }

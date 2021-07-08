@@ -1,11 +1,11 @@
 ﻿
 using System;
+using UnityEngine;
 
 public struct DogeCommand
 {
     public DogeCommandType Type;
-    public float ShootingX;
-    public float ShootingY;
+    public Vector3 ShootEndPoint;
 }
 
 [Flags]

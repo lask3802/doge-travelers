@@ -138,6 +138,10 @@ PrefabInstance:
       propertyPath: DogeCamera
       value: 
       objectReference: {fileID: 250887736}
+    - target: {fileID: 806211384328055357, guid: 1abe94f7cb83fa24b9d750dd4183a6f5, type: 3}
+      propertyPath: MainGunHolder
+      value: 
+      objectReference: {fileID: 488646456}
     - target: {fileID: 806211384328055746, guid: 1abe94f7cb83fa24b9d750dd4183a6f5, type: 3}
       propertyPath: m_RootOrder
       value: 9
@@ -276,6 +280,17 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &488646456 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5569018904888720855, guid: f0a6983adc9ec814998dd755c7134b90, type: 3}
+  m_PrefabInstance: {fileID: 642151689988845578}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9fff6e14dc5434d951352264310fa6f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &653854572
 GameObject:
   m_ObjectHideFlags: 0
