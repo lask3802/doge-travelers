@@ -21,9 +21,9 @@ namespace UnityTemplateProjects
         private bool mRunning;
         private int mWaitFrames;
         
-        public float FireDuration = 5;
-        public float FireArriveTime = 10;
-        public int FireCount = 1;
+        public float FireDuration;
+        public float FireArriveTime;
+        public int FireCount;
 
         private int FireDelay = 6;
         
@@ -152,7 +152,7 @@ namespace UnityTemplateProjects
             meteoroid.SetEndPosition(new Vector3(x * lengthBlock, y * heightBlock, PlayerPlaneZ));
             
             meteoroid.SetArriveTime(FireArriveTime);
-            meteoroid.SetSize(0.75f);
+            meteoroid.SetSize(0.5f);
             meteoroid.OnCollideTargetCallBack += OnMeteoroidHitTarget;
             meteoroid.OnCollideAnotherMeteoroidCallBack += OnMeteoroidHitAnotherMeteoroid;
                 
