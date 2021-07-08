@@ -63,7 +63,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mAsteroidBreakEffect: {fileID: 9132183722172489451}
   mRigidbody: {fileID: 390711239}
-  mExplodeSound: {fileID: 0}
 --- !u!1 &5456508696989690960
 GameObject:
   m_ObjectHideFlags: 0
@@ -112,9 +111,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MeteoroidBasic: {fileID: 390711238}
   FireDuration: 120
-  FireSpeed: 10
+  FireArriveTime: 10
   FireCount: 1
-  FireMeteoroidSize: 5
 --- !u!114 &6534448419125361501
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -128,6 +126,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mMeteoroidManager: {fileID: 5456508696989690963}
+  mPatternSerialized: {fileID: 11400000, guid: 82370b6b3c9e619418fa2e896fb7ed72, type: 2}
+--- !u!64 &1649519788
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5456508698226164364}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300000, guid: 2bea0e0bb8b74c748b010147fbf1624d, type: 3}
 --- !u!82 &1542691623
 AudioSource:
   m_ObjectHideFlags: 0
@@ -224,20 +237,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!64 &1649519788
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5456508698226164364}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 4300000, guid: 2bea0e0bb8b74c748b010147fbf1624d, type: 3}
 --- !u!1001 &5456508697372080467
 PrefabInstance:
   m_ObjectHideFlags: 0

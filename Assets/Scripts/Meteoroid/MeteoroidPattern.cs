@@ -1,10 +1,13 @@
-﻿namespace Meteoroid
+﻿using System;
+
+namespace Meteoroid
 {
+    [Serializable]
     public class MeteoroidPattern
     {
+        public float Time;
         public int FireCount;
-        public int FireDuration;
-        public float FireSpeed;
-        public float FireSize;
+        public float FireDuration;
+        public float FireArriveTime;
     }
 }

@@ -79,7 +79,7 @@ namespace UnityTemplateProjects.Weapon
             {
                 var meteoroid = hit.transform.GetComponent<SimpleMeteoroid>();
                 if (meteoroid == null) continue;
-                if (meteoroid.transform.position.z < 5) continue;
+                if (meteoroid.transform.position.z <= transform.position.z + 0.5f) continue;
                 return meteoroid.transform.position;
             }
             var mouse = Input.mousePosition;

@@ -1,0 +1,55 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e7ba74e91f84f30861169d19f9f20a6, type: 3}
+  m_Name: Meteoroid Pattern Serialized
+  m_EditorClassIdentifier: 
+  Patterns:
+  - Time: 0
+    FireCount: 0
+    FireDuration: 0
+    FireArriveTime: 0
+  - Time: 5
+    FireCount: 2
+    FireDuration: 1.5
+    FireArriveTime: 5
+  - Time: 20
+    FireCount: 2
+    FireDuration: 1.2
+    FireArriveTime: 4
+  - Time: 40
+    FireCount: 3
+    FireDuration: 1
+    FireArriveTime: 3.5
+  - Time: 60
+    FireCount: 3
+    FireDuration: 0.8
+    FireArriveTime: 3
+  - Time: 80
+    FireCount: 4
+    FireDuration: 0.8
+    FireArriveTime: 2.5
+  - Time: 100
+    FireCount: 4
+    FireDuration: 0.8
+    FireArriveTime: 2
+  - Time: 120
+    FireCount: 3
+    FireDuration: 0.4
+    FireArriveTime: 1.5
+  - Time: 140
+    FireCount: 3
+    FireDuration: 0.3
+    FireArriveTime: 1
+  - Time: 160
+    FireCount: 3
+    FireDuration: 0.2
+    FireArriveTime: 1

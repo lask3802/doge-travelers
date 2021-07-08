@@ -21,19 +21,18 @@ namespace UnityTemplateProjects
         private bool mRunning;
         private int mWaitFrames;
         
-        public int FireDuration = 120;
-        public float FireSpeed = 10;
+        public float FireDuration = 5;
+        public float FireArriveTime = 10;
         public int FireCount = 1;
-        public float FireMeteoroidSize = 5;
 
-        private int FireDelay = 30;
+        private int FireDelay = 6;
         
         private float FirePlaneLength = 300f;
         private float FirePlaneHeight = 150f;
         private float FirePlaneZ = 300f;
 
-        private float PlayerPlaneLength = 20f;
-        private float PlayerPlaneHeight = 20f;
+        private float PlayerPlaneLength = 10f;
+        private float PlayerPlaneHeight = 10f;
         private float PlayerPlaneZ = 0f;
 
         private readonly Subject<Unit> mMeteoroidHitTargetSubject = new Subject<Unit>();
@@ -61,8 +60,7 @@ namespace UnityTemplateProjects
         {
             FireCount = pattern.FireCount;
             FireDuration = pattern.FireDuration;
-            FireSpeed = pattern.FireSpeed;
-            FireMeteoroidSize = pattern.FireSize;
+            FireArriveTime = pattern.FireArriveTime;
         }
 
         public void Pause()
@@ -100,7 +98,7 @@ namespace UnityTemplateProjects
                     CreateMeteoroid(i);
                 }
 
-                mWaitFrames = FireDuration;
+                mWaitFrames = (int)(FireDuration * 60);
             }
 
             PassPlayerPlaneMeteoroidCheck();
@@ -133,9 +131,6 @@ namespace UnityTemplateProjects
             var meteoroid = Instantiate(MeteoroidBasic, transform);
             meteoroid.transform.localPosition = Vector3.zero;
             
-            //var x = (float) mRandom.NextDouble() * 2 * FirePlaneLength - FirePlaneLength;
-            //var y = (float) mRandom.NextDouble() * 2 * FirePlaneHeight - FirePlaneHeight;
-
             var x = mRandom.Next(-4, 5);
             var y = mRandom.Next(-4, 5);
 
@@ -144,14 +139,14 @@ namespace UnityTemplateProjects
 
             meteoroid.SetInitPosition(new Vector3(x * lengthBlock, y * heightBlock, FirePlaneZ));
             meteoroid.SetTarget(mTarget);
-
-            var xInt = mRandom.Next(-4, 5);
-            var yInt = mRandom.Next(-4, 5);
             
-            meteoroid.SetEndPosition(new Vector3(xInt * 5, yInt * 5, PlayerPlaneZ));
+            lengthBlock = PlayerPlaneLength * 2 / 8;
+            heightBlock = PlayerPlaneHeight * 2 / 8;
             
-            meteoroid.SetSpeed(FireSpeed);
-            meteoroid.SetSize(FireMeteoroidSize);
+            meteoroid.SetEndPosition(new Vector3(x * lengthBlock, y * heightBlock, PlayerPlaneZ));
+            
+            meteoroid.SetArriveTime(FireArriveTime);
+            meteoroid.SetSize(1);
             meteoroid.OnCollideTargetCallBack += OnMeteoroidHitTarget;
             meteoroid.OnCollideAnotherMeteoroidCallBack += OnMeteoroidHitAnotherMeteoroid;
                 

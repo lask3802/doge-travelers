@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using UniRx;
 using UnityEngine;
 using UnityTemplateProjects;
@@ -9,15 +10,21 @@ namespace Meteoroid
     {
         [SerializeField]
         private MeteoroidManager mMeteoroidManager;
+
+        [SerializeField] 
+        private MeteoroidPatternSerialized mPatternSerialized;
+        
         private bool mRunning;
         private int mFramePassed;
 
         private readonly Subject<Unit> mEndGameSubject = new Subject<Unit>();
         private readonly Subject<float> mProgressSubject = new Subject<float>();
         private readonly Subject<float> mSpeedSubject = new Subject<float>();
+        
+        private const int FramesOneSec = 60;
 
-        private const int EndGameFrameCount = (3 * 60 + 5) * 60;
-        private const int StopFireFrameCount = 3 * 60 * 60;
+        private const int EndGameFrameCount = (3 * 60 + 5) * FramesOneSec;
+        private const int StopFireFrameCount = 3 * 60 * FramesOneSec;
 
         public IObservable<Unit> MeteoroidHitTargetAsObservable()
         {
@@ -78,36 +85,31 @@ namespace Meteoroid
                 return;
             }
 
+            MeteoroidPattern pattern;
             if (mFramePassed >= StopFireFrameCount)
             {
-                mMeteoroidManager.SetMeteoroidPattern(new MeteoroidPattern
-                {
-                    FireDuration = int.MaxValue
-                });
+                pattern = new MeteoroidPattern {FireDuration = int.MaxValue};
             }
             else
             {
-
-                var speed = mFramePassed / 600f + 11;
-            
-                mMeteoroidManager.SetMeteoroidPattern(new MeteoroidPattern
-                {
-                    FireCount = FrameToSecFloor(mFramePassed) / 70 + 3,
-                    FireSpeed = speed,
-                    FireDuration = 2 * 60 - (FrameToSecFloor(mFramePassed) / 50) * 30,
-                    FireSize = 1.5f
-                });
-                mSpeedSubject.OnNext(speed);
+                pattern = mPatternSerialized.Patterns
+                    .OrderByDescending(p => p.Time)
+                    .First(p => mFramePassed >= p.Time * FramesOneSec);
             }
             
+            mMeteoroidManager.SetMeteoroidPattern(pattern);
+            mSpeedSubject.OnNext(300000f / pattern.FireArriveTime);
             mProgressSubject.OnNext((float)mFramePassed/EndGameFrameCount);
+        }
+
+        private bool IsInTimeRangeSecond(int start, int end)
+        {
+            return FrameToSecFloor(mFramePassed) >= start && FrameToSecFloor(mFramePassed) < end;
         }
 
         private static int FrameToSecFloor(int frameCount)
         {
-            // assume 1 sec = 60 frames
-
-            return frameCount / 60;
+            return frameCount / FramesOneSec;
         }
     }
 }

@@ -11,12 +11,12 @@ namespace UnityTemplateProjects.Meteoroid
         private GameObject mAsteroidBreakEffect;
         [SerializeField]
         private Rigidbody mRigidbody;
-        [SerializeField]
-        private AudioSource mExplodeSound;
 
         private MeteoroidTarget mTarget;
-        private Vector3 mMovement;
-        private float mSpeed;
+        private Vector3 mEndPosition;
+        private float mArriveTime;
+
+        private bool mFired;
         
         public event Action<SimpleMeteoroid> OnCollideTargetCallBack = delegate {  };
         public event Action<SimpleMeteoroid> OnCollideAnotherMeteoroidCallBack = delegate {  };
@@ -34,16 +34,12 @@ namespace UnityTemplateProjects.Meteoroid
 
         public void SetEndPosition(Vector3 position)
         {
-            mMovement = position - transform.position;
+            mEndPosition = position;
         }
 
-        /// <summary>
-        /// vector from start to target, multiply speed
-        /// </summary>
-        /// <param name="speed"></param>
-        public void SetSpeed(float speed)
+        public void SetArriveTime(float arriveTime)
         {
-            mSpeed = speed;
+            mArriveTime = arriveTime;
         }
 
         public void SetSize(float size)
@@ -53,11 +49,19 @@ namespace UnityTemplateProjects.Meteoroid
 
         public void Fire(System.Random random)
         {
-            mRigidbody.AddForce(mMovement * mSpeed);
+            var rangeVector = mEndPosition - transform.position;
+            var distance = rangeVector.magnitude;
+            var speedUnit = distance / mArriveTime;
+
+            var direction = rangeVector.normalized;
+            mRigidbody.AddForce(direction * (speedUnit * 50)); // magic number here
+
             var x = 5 * ((float)random.NextDouble() * 360 - 180);
             var y = 5 * ((float)random.NextDouble() * 360 - 180);
             var z = 5 * ((float)random.NextDouble() * 360 - 180);
+            
             mRigidbody.AddTorque(new Vector3(x, y, z));
+            mFired = true;
         }
 
         public void Explode()
