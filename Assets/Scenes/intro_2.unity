@@ -188,7 +188,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 254593643}
-  m_LocalRotation: {x: 0.07714168, y: 0.19788988, z: -0.015623984, w: 0.9770592}
+  m_LocalRotation: {x: 0.077141255, y: 0.19791602, z: -0.015626047, w: 0.9770539}
   m_LocalPosition: {x: -4.5763316, y: 1.724355, z: 2.087776}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -204,7 +204,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 254593643}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 0}
   m_CullingMode: 0
@@ -273,8 +273,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '<color="yellow">Doge Traveler is coming home from the moon to the Doge
-    Star! '
+  m_text: <color="red">Oh no! Doge Traveler #1 was stuck in space.</color>
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: f5e1bb6b20910d0459b926f0da0fa390, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: cf359558af46dcf41bc32039c9a24380, type: 2}
@@ -502,7 +501,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 406094136}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 0}
   m_CullingMode: 0
@@ -536,31 +535,13 @@ GameObject:
   - component: {fileID: 435922871}
   - component: {fileID: 435922870}
   - component: {fileID: 435922869}
-  - component: {fileID: 435922868}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 0
---- !u!114 &435922868
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 435922867}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_IgnoreReversedGraphics: 1
-  m_BlockingObjects: 0
-  m_BlockingMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
 --- !u!114 &435922869
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -674,6 +655,24 @@ PlayableDirector:
     value: {fileID: 406094138}
   - key: {fileID: 5063081277343407231, guid: 1f8f7203c7c60fb44b01e9b62b54467d, type: 2}
     value: {fileID: 1774598230}
+  - key: {fileID: -8154556273701154454, guid: 1f8f7203c7c60fb44b01e9b62b54467d, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: -8327231362748598183, guid: 325905fd39003434186113d4dfe01406, type: 2}
+    value: {fileID: 1557887723}
+  - key: {fileID: -7162609969629141075, guid: 325905fd39003434186113d4dfe01406, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 27013068075340421, guid: 325905fd39003434186113d4dfe01406, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: -453669597260287811, guid: 325905fd39003434186113d4dfe01406, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 2452552189359828558, guid: 325905fd39003434186113d4dfe01406, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 6442995384768841576, guid: 325905fd39003434186113d4dfe01406, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 5063081277343407231, guid: 325905fd39003434186113d4dfe01406, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: -8154556273701154454, guid: 325905fd39003434186113d4dfe01406, type: 2}
+    value: {fileID: 0}
   m_ExposedReferences:
     m_References:
     - 1d646dbc5cbbec447b01973400cc4a34: {fileID: 254593644}
@@ -5510,7 +5509,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 961937071}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 0}
   m_CullingMode: 0
@@ -5679,7 +5678,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: 34.99994}
+  m_AnchoredPosition: {x: 0, y: 40.33}
   m_SizeDelta: {x: 524.35, y: 50}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &1187769845
@@ -5702,7 +5701,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: ' <color="red">Dodge the asteroids and guide Doge home! </color>'
+  m_text: <color=#00FFFF>Ride with Doge Traveler #1, blow up the asteroids so Doge
+    Traveler stuck no more!</color>
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: f5e1bb6b20910d0459b926f0da0fa390, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: cf359558af46dcf41bc32039c9a24380, type: 2}
@@ -5729,8 +5729,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 24
+  m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -5867,7 +5867,7 @@ MonoBehaviour:
   autoPlay: 1
   useTargetAsV3: 0
   endValueFloat: 0
-  endValueV3: {x: 0, y: -200, z: 0}
+  endValueV3: {x: 0, y: -250, z: 0}
   endValueV2: {x: 0, y: 0}
   endValueColor: {r: 1, g: 1, b: 1, a: 1}
   endValueString: 
@@ -5991,7 +5991,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -58, y: 0}
   m_SizeDelta: {x: 524.35, y: 50}
   m_Pivot: {x: 1, y: 0.5}
 --- !u!114 &1430458999
@@ -6014,8 +6014,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: ' <color="orange">However, many asteroids blocked Doge Traveler''s way.
-    </color>'
+  m_text: <color="yellow">Such sad :( <color=#00FF00>But worry not! Master Doge sends
+    you, the helper Doge to time-travel back to the past! wow!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: f5e1bb6b20910d0459b926f0da0fa390, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: cf359558af46dcf41bc32039c9a24380, type: 2}
@@ -6180,7 +6180,7 @@ MonoBehaviour:
   autoPlay: 1
   useTargetAsV3: 0
   endValueFloat: 0
-  endValueV3: {x: 530, y: 0, z: 0}
+  endValueV3: {x: 600, y: 0, z: 0}
   endValueV2: {x: 0, y: 0}
   endValueColor: {r: 1, g: 1, b: 1, a: 1}
   endValueString: 
@@ -6276,7 +6276,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1557887718}
-  m_LocalRotation: {x: 0.07714168, y: 0.19788988, z: -0.015623984, w: 0.9770592}
+  m_LocalRotation: {x: 0.077141255, y: 0.19791602, z: -0.015626047, w: 0.9770539}
   m_LocalPosition: {x: -1.0855787, y: 0.70964575, z: -3.5140285}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:

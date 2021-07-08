@@ -188,7 +188,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 254593643}
-  m_LocalRotation: {x: 0.07714168, y: 0.19788988, z: -0.015623984, w: 0.9770592}
+  m_LocalRotation: {x: 0.07714128, y: 0.19791548, z: -0.015626004, w: 0.977054}
   m_LocalPosition: {x: -4.5763316, y: 1.724355, z: 2.087776}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -273,8 +273,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '<color="yellow">Doge Traveler is coming home from the moon to the Doge
-    Star! '
+  m_text: '<color="orange">Oh no! 2 Doge Travelers stuck in space. '
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: f5e1bb6b20910d0459b926f0da0fa390, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: cf359558af46dcf41bc32039c9a24380, type: 2}
@@ -674,6 +673,8 @@ PlayableDirector:
     value: {fileID: 406094138}
   - key: {fileID: 5063081277343407231, guid: 1f8f7203c7c60fb44b01e9b62b54467d, type: 2}
     value: {fileID: 1774598230}
+  - key: {fileID: -8154556273701154454, guid: 1f8f7203c7c60fb44b01e9b62b54467d, type: 2}
+    value: {fileID: 0}
   m_ExposedReferences:
     m_References:
     - 1d646dbc5cbbec447b01973400cc4a34: {fileID: 254593644}
@@ -5679,7 +5680,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: 34.99994}
+  m_AnchoredPosition: {x: 0, y: 52}
   m_SizeDelta: {x: 524.35, y: 50}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &1187769845
@@ -5702,7 +5703,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: ' <color="red">Dodge the asteroids and guide Doge home! </color>'
+  m_text: <color="purple">wow! <color=#00FFFF> Ride with the Doge Travelers, blow
+    up the asteroids so Doge Travelers stuck no more!</color>
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: f5e1bb6b20910d0459b926f0da0fa390, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: cf359558af46dcf41bc32039c9a24380, type: 2}
@@ -5729,8 +5731,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 24
+  m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -5991,7 +5993,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -45, y: 0}
   m_SizeDelta: {x: 524.35, y: 50}
   m_Pivot: {x: 1, y: 0.5}
 --- !u!114 &1430458999
@@ -6014,8 +6016,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: ' <color="orange">However, many asteroids blocked Doge Traveler''s way.
-    </color>'
+  m_text: <color="red">Such sad :( <color="yellow">But worry not! Master Doge sends
+    you, the helper Doge to time-travel back to the past!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: f5e1bb6b20910d0459b926f0da0fa390, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: cf359558af46dcf41bc32039c9a24380, type: 2}
@@ -6276,7 +6278,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1557887718}
-  m_LocalRotation: {x: 0.07714168, y: 0.19788988, z: -0.015623984, w: 0.9770592}
+  m_LocalRotation: {x: 0.07714128, y: 0.19791548, z: -0.015626004, w: 0.977054}
   m_LocalPosition: {x: -1.0855787, y: 0.70964575, z: -3.5140285}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
