@@ -17,7 +17,7 @@ public class DogeController:MonoBehaviour
     public float DogeRightBound;
 
     private List<DogeCommand> mFrameCommands;
-    private float mStartX;
+    private Vector3 mStartPos;
 
     private bool mIsPlaying;
     private bool mIsReplay;
@@ -31,16 +31,16 @@ public class DogeController:MonoBehaviour
         mIsReplay = false;
     }
 
-    private void ResetPosition(float startX)
+    private void ResetPosition(Vector3 start)
     {
-        if(DogeCamera != null) DogeCamera.transform.localPosition = new Vector3(0, 0, -5);
-        gameObject.transform.localPosition = new Vector3(startX, 0, 0);
+        if(DogeCamera != null) DogeCamera.transform.localPosition = new Vector3(0f, 0f, -2f);
+        gameObject.transform.localPosition = start;
     }
 
-    public void StartGame(float startX)
+    public void StartGame(Vector3 startPos)
     {
         mFrameCommands = new List<DogeCommand>();
-        ResetPosition(startX);
+        ResetPosition(startPos);
         mIsPlaying = true;
         mIsReplay = false;
     }
@@ -52,10 +52,10 @@ public class DogeController:MonoBehaviour
         return mFrameCommands;
     }
 
-    public void SetReplay(List<DogeCommand> commands, float startX)
+    public void SetReplay(List<DogeCommand> commands, Vector3 start)
     {
         mFrameCommands = commands;
-        mStartX = startX;
+        mStartPos = start;
         CharacterBody.SetActive(false);
     }
 
@@ -65,7 +65,7 @@ public class DogeController:MonoBehaviour
         mIsPlaying = false;
         mIsReplay = true;
         mReplayFrameCount = 0;
-        ResetPosition(mStartX);
+        ResetPosition(mStartPos);
     }
 
     private void Update()
