@@ -17,13 +17,13 @@ namespace UnityTemplateProjects
         
         void Start()
         {
-            mMeteoroidPatternController.ProgressChanged()
+            /*mMeteoroidPatternController.ProgressChanged()
                 .Subscribe(value => Debug.Log($"progress: {value}"))
                 .AddTo(this);
             
             mMeteoroidPatternController.SpeedChanged()
                 .Subscribe(value => Debug.Log($"speed: {value}"))
-                .AddTo(this);
+                .AddTo(this);*/
             
             mMeteoroidPatternController.MeteoroidHitTargetAsObservable()
                 .Subscribe(_ => Debug.Log("<color=red>was hit!</color>"));

@@ -6,7 +6,7 @@ namespace UnityTemplateProjects
 {
     public class MeteoroidTarget : MonoBehaviour
     {
-        private void Update()
+        /*private void Update()
         {
             if (Input.GetKey(KeyCode.W) && transform.position.y < 20)
             {
@@ -24,7 +24,7 @@ namespace UnityTemplateProjects
             {
                 transform.position += Vector3.right / 5;
             }
-        }
+        }*/
 
 
         private void OnCollisionEnter(Collision other)
