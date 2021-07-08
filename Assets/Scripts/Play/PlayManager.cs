@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
+using DogeTraveler.UI;
 using EasyButtons;
 using Meteoroid;
 using UniRx;
@@ -52,6 +53,19 @@ public class PlayManager : MonoBehaviour
         mAllDogeCommands = new List<List<DogeCommand>>();
         mAllDogeStartX = new List<float>();
         mRoundCount = 0;
+        var playUIView = GameObject.FindWithTag("MasterCanvas").GetComponentInChildren<GamePlayUIView>(true);
+        playUIView.Pause.Button.OnClickAsObservable().Subscribe(_ => Pause()).AddTo(this);
+        var pauseUIView = GameObject.FindWithTag("MasterCanvas").GetComponentInChildren<GamePauseUIView>(true);
+        pauseUIView.Resume.Button.OnClickAsObservable().Subscribe(_ => Resume()).AddTo(this);
+        pauseUIView.BackToTitle.Button.OnClickAsObservable()
+            .Subscribe(_ => GameProgressManager.Instance.OnBackToTitle().Forget()).AddTo(this);
+
+        var gameOverUIView = GameObject.FindWithTag("MasterCanvas").GetComponentInChildren<GameOverUIView>(true);
+        gameOverUIView.Retry.Button.OnClickAsObservable()
+            .Subscribe(_ => GameProgressManager.Instance.OnRetryGame().Forget()).AddTo(this);
+        gameOverUIView.BackToTitle.Button.OnClickAsObservable()
+            .Subscribe(_ => GameProgressManager.Instance.OnBackToTitle().Forget()).AddTo(this);
+
 
         mMeteoroidPatternController.ProgressEndAsObservable()
             .Subscribe(_ => WinGame()).AddTo(this);
@@ -98,6 +112,8 @@ public class PlayManager : MonoBehaviour
         var commands = MainCharacterController.EndGame();
         
         mPreviousDoges.Add(CreatePreviousDoge(commands, mCurrentPosition));
+        if(mRoundCount != 3)
+            MainCharacterController.DisableDogeCamera();
         GameProgressManager.Instance.OnRoundEnd(mRoundCount).Forget();
     }
 
@@ -117,6 +133,22 @@ public class PlayManager : MonoBehaviour
                 doge.ShouldPlayExplode = false;
             }
         }
+    }
+
+    public void Pause()
+    {
+        mMeteoroidPatternController.PatternPause();
+        MainCharacterController.Pause();
+        mWeaponManager.PauseWeapon();
+        mPreviousDoges.ForEach(c => c.PauseReplay());
+    }
+
+    public void Resume()
+    {
+        mMeteoroidPatternController.PatternResume();
+        MainCharacterController.Resume();
+        mWeaponManager.RunWeapon();
+        mPreviousDoges.ForEach(c => c.ResumeReplay());
     }
 
     public void WinGame()

@@ -68,8 +68,32 @@ public class DogeController:MonoBehaviour
     public List<DogeCommand> EndGame()
     {
         CharacterBody.SetActive(false);
-        if (DogeCamera != null) DogeCamera.gameObject.SetActive(false);
         return mFrameCommands;
+    }
+
+    public void DisableDogeCamera()
+    {
+        if (DogeCamera != null) DogeCamera.gameObject.SetActive(false);
+    }
+
+    public void Pause()
+    {
+        mIsPlaying = false;
+    }
+    
+    public void Resume()
+    {
+        mIsPlaying = true;
+    }
+    
+    public void PauseReplay()
+    {
+        mIsReplay = false;
+    }
+    
+    public void ResumeReplay()
+    {
+        mIsReplay = true;
     }
 
     public void SetReplay(List<DogeCommand> commands, Vector3 start)

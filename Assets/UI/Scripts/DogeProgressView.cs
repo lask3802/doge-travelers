@@ -1,4 +1,6 @@
+using System;
 using Doozy.Engine.Progress;
+using UniRx;
 using UnityEngine;
 
 namespace DogeTraveler.UI
@@ -14,10 +16,15 @@ namespace DogeTraveler.UI
         [Range(0,1f)]
         public float Progress = 0;
         // Update is called once per frame
-        void Update()
+        private void Start()
         {
-            Progressor.SetProgress(Progress);
-            Indicator.anchoredPosition = Progress * ProgressBar.rect.height * Vector2.up + Indicator.anchoredPosition*Vector2.right;
+            GameProgressManager.Instance.GamePlayProgress.Subscribe(s =>
+            {
+                Progressor.SetProgress(s);
+                Indicator.anchoredPosition = s * ProgressBar.rect.height * Vector2.up +
+                                             Indicator.anchoredPosition * Vector2.right;
+
+            }).AddTo(this);
         }
     }
 }

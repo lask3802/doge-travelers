@@ -1,5 +1,6 @@
 ﻿using System;
 using Cysharp.Threading.Tasks;
+using Doozy.Engine;
 using UniRx;
 using UnityEngine;
 using UnityEngine.Playables;
@@ -67,13 +68,17 @@ public class GameProgressManager:MonoBehaviour
         {
             case 1:
                 mGameProgressState.Value = GameState.Intro2;
+                GameEventMessage.SendEvent("RoundEnd");
                 await RunCutSceneAsync("intro_2");
                 mGameProgressState.Value = GameState.Play2;
+                GameEventMessage.SendEvent("GamePlayReady");
                 break;
             case 2:
                 mGameProgressState.Value = GameState.Intro3;
+                GameEventMessage.SendEvent("RoundEnd");
                 await RunCutSceneAsync("intro_3");
                 mGameProgressState.Value = GameState.Play3;
+                GameEventMessage.SendEvent("GamePlayReady");
                 break;
             case 3:
                 mGameProgressState.Value = GameState.Failed;
@@ -93,7 +98,18 @@ public class GameProgressManager:MonoBehaviour
     public async UniTask OnFailedGame()
     {
         mGameProgressState.Value = GameState.Failed;
-        await SceneManager.LoadSceneAsync("start", LoadSceneMode.Single);
+        GameEventMessage.SendEvent("GameFailed");
+    }
+
+    public async UniTask OnRetryGame()
+    {
+        await SceneManager.LoadSceneAsync("main");
+        mGameProgressState.Value = GameState.Play1;
+    }
+
+    public async UniTask OnBackToTitle()
+    {
+        await SceneManager.LoadSceneAsync("start");
         mGameProgressState.Value = GameState.Start;
     }
 
