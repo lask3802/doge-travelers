@@ -26,6 +26,9 @@ namespace Meteoroid
         private const int EndGameFrameCount = (3 * 60 + 5) * FramesOneSec;
         private const int StopFireFrameCount = 3 * 60 * FramesOneSec;
 
+        private int mStopFireFrameCount;
+        private int mEndGameFrameCount;
+
         public IObservable<Unit> MeteoroidHitTargetAsObservable()
         {
             return mMeteoroidManager.MeteoroidHitTargetAsObservable();
@@ -52,6 +55,8 @@ namespace Meteoroid
             mFramePassed = 0;
             mMeteoroidManager.RegisterTarget();
             mMeteoroidManager.StartShooting(seed);
+            mStopFireFrameCount = (int)mPatternSerialized.Patterns.Last().Time * FramesOneSec;
+            mEndGameFrameCount = mStopFireFrameCount + 5 * FramesOneSec;
         }
 
         public void PatternPause()
@@ -78,7 +83,7 @@ namespace Meteoroid
             
             mFramePassed++;
 
-            if (mFramePassed == EndGameFrameCount)
+            if (mFramePassed == mEndGameFrameCount)
             {
                 mEndGameSubject.OnNext(new Unit());
                 PatternStop();
@@ -86,7 +91,7 @@ namespace Meteoroid
             }
 
             MeteoroidPattern pattern;
-            if (mFramePassed >= StopFireFrameCount)
+            if (mFramePassed >= mStopFireFrameCount)
             {
                 pattern = new MeteoroidPattern {FireDuration = int.MaxValue};
             }

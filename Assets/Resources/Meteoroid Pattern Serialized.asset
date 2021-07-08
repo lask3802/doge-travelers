@@ -53,3 +53,7 @@ MonoBehaviour:
     FireCount: 3
     FireDuration: 0.2
     FireArriveTime: 1
+  - Time: 180
+    FireCount: 0
+    FireDuration: 0
+    FireArriveTime: 0

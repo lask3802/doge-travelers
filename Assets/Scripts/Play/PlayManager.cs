@@ -56,7 +56,7 @@ public class PlayManager : MonoBehaviour
         mMeteoroidPatternController.ProgressEndAsObservable()
             .Subscribe(_ => WinGame()).AddTo(this);
         mMeteoroidPatternController.MeteoroidHitTargetAsObservable()
-            .Subscribe(_ => StopGame()).AddTo(this);
+            .Subscribe(_ => StopGame().Forget()).AddTo(this);
         mMeteoroidPatternController.SpeedChanged()
             .Subscribe(GameProgressManager.Instance.UpdateGamePlaySpeed).AddTo(this);
         mMeteoroidPatternController.ProgressChanged()
@@ -123,6 +123,8 @@ public class PlayManager : MonoBehaviour
     {
         mMeteoroidPatternController.PatternStop();
         mWeaponManager.StopWeapon();
+        Speedline.SetActive(false);
+        Bgm.Stop();
         GameProgressManager.Instance.OnWinGame(mRoundCount).Forget();
     }
 
