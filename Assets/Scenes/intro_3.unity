@@ -188,7 +188,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 254593643}
-  m_LocalRotation: {x: 0.07714164, y: 0.19789219, z: -0.015624164, w: 0.97705877}
+  m_LocalRotation: {x: 0.07714152, y: 0.19789886, z: -0.015624692, w: 0.9770574}
   m_LocalPosition: {x: -4.5763316, y: 1.724355, z: 2.087776}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -674,7 +674,7 @@ PlayableDirector:
   - key: {fileID: 5063081277343407231, guid: 1f8f7203c7c60fb44b01e9b62b54467d, type: 2}
     value: {fileID: 1774598230}
   - key: {fileID: -8154556273701154454, guid: 1f8f7203c7c60fb44b01e9b62b54467d, type: 2}
-    value: {fileID: 0}
+    value: {fileID: 1929081347}
   m_ExposedReferences:
     m_References:
     - 1d646dbc5cbbec447b01973400cc4a34: {fileID: 254593644}
@@ -6278,7 +6278,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1557887718}
-  m_LocalRotation: {x: 0.07714164, y: 0.19789219, z: -0.015624164, w: 0.97705877}
+  m_LocalRotation: {x: 0.07714152, y: 0.19789886, z: -0.015624692, w: 0.9770574}
   m_LocalPosition: {x: -1.0855787, y: 0.70964575, z: -3.5140285}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -6636,6 +6636,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1929081346}
   - component: {fileID: 1929081345}
+  - component: {fileID: 1929081347}
   m_Layer: 0
   m_Name: BGM
   m_TagString: Untagged
@@ -6753,6 +6754,25 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &1929081347
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1929081344}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!4 &1951529575 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6260272731469400040, guid: 8546e4f6fcea4bb488e69fd318d0a5d4, type: 3}

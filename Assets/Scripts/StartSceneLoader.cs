@@ -12,7 +12,7 @@ namespace DogeTraveler
     public class StartSceneLoader : MonoBehaviour
     {
         private Scene mIntroScene;
-
+        private GameObject MasterCanvas;
         void Start()
         {
             LoadScenes().Forget();        
@@ -21,8 +21,13 @@ namespace DogeTraveler
         async UniTask LoadScenes()
         {
             GameEventManager.Instance.enabled = true;
-            await SceneManager.LoadSceneAsync("UIScene", LoadSceneMode.Additive);
-            var mainMenuView = GameObject.FindWithTag("MasterCanvas").GetComponentInChildren<MainMenuView>(true);
+            if (!MasterCanvas)
+            {
+                await SceneManager.LoadSceneAsync("UIScene", LoadSceneMode.Additive);
+                MasterCanvas = GameObject.FindWithTag("MasterCanvas");
+            }
+
+            var mainMenuView = MasterCanvas.GetComponentInChildren<MainMenuView>(true);
             ListenStartButton(mainMenuView.StartButton).Forget();
             //GameObject.FindWithTag("MainCamera").SetActive(false);
             
