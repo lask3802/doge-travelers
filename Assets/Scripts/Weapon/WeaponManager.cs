@@ -16,6 +16,8 @@ namespace UnityTemplateProjects.Weapon
         private GunHolder mGunHolder;
         private LaserHolder mLaserHolder;
         private bool mRunning;
+        private bool mMainGunAvailable;
+        private bool mMainLaserAvailable;
 
         private readonly HashSet<LaserHolder> mRegisteredLaserHolders = new HashSet<LaserHolder>();
 
@@ -37,6 +39,16 @@ namespace UnityTemplateProjects.Weapon
             {
                 mRegisteredLaserHolders.Add(laserHolder);
             }
+        }
+
+        public void SetMainGunAvailable()
+        {
+            mMainGunAvailable = true;
+        }
+
+        public void SetMainLaserAvailable()
+        {
+            mMainLaserAvailable = true;
         }
 
         public void RunWeapon()
@@ -99,25 +111,28 @@ namespace UnityTemplateProjects.Weapon
                 Destroy(bullet.gameObject);
             }
 
+            if (mMainGunAvailable)
+            {
+                GunInputProcess();
+            }
+
+            if (mMainLaserAvailable)
+            {
+                LaserInputProcess();
+            }
+        }
+
+        private void GunInputProcess()
+        {
             if (Input.GetMouseButtonDown(0))
             {
                 var target = GetTargetFromMouseClick();
                 mGunHolder = MainGunHolder;
                 GunFire(target);
             }
-
-            LaserInputProcess();
         }
 
-        public Vector3 GetLaserEndPointFromMouseClick()
-        {
-            var camera = DogeCamera;
-            var mouse = Input.mousePosition;
-            mouse.z = 300;
-            return camera.ScreenToWorldPoint(mouse);
-        }
-
-        public Vector3 GetTargetFromMouseClick()
+        private Vector3 GetTargetFromMouseClick()
         {
             var camera = DogeCamera;
             
@@ -156,6 +171,14 @@ namespace UnityTemplateProjects.Weapon
                 mLaserHolder = MainLaserHolder;
                 LaserEnd();
             }
+        }
+
+        private Vector3 GetLaserEndPointFromMouseClick()
+        {
+            var camera = DogeCamera;
+            var mouse = Input.mousePosition;
+            mouse.z = 300;
+            return camera.ScreenToWorldPoint(mouse);
         }
     }
 }

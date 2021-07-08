@@ -58,6 +58,10 @@ public class PlayManager : MonoBehaviour
     {
         mCurrentPosition = new Vector3(0, 0, mRoundCount*-5);
         MainCharacterController.StartGame(mCurrentPosition);
+        if (mRoundCount >= 1)
+            mWeaponManager.SetMainGunAvailable();
+        if (mRoundCount >= 2)
+            mWeaponManager.SetMainLaserAvailable();
         mWeaponManager.RunWeapon();
         mPreviousDoges.ForEach(c => c.Replay());
         mMeteoroidPatternController.PatternStart(1);
