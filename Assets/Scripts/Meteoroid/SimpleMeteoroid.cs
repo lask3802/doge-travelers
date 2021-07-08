@@ -78,16 +78,17 @@ namespace UnityTemplateProjects.Meteoroid
             Destroy(explodeEffect, 3f);
         }
 
+        private void OnTriggerEnter(Collider other)
+        {
+            // only characters are trigger, so if enter this method it should be character was hit;
+            OnCollideTargetCallBack.Invoke(this);
+        }
+
         private void OnCollisionEnter(Collision collision)
         {
             if (collision.gameObject.GetComponent<SimpleMeteoroid>() != null)
             {
                 OnCollideAnotherMeteoroidCallBack.Invoke(this);
-            }
-
-            if (collision.gameObject == mTarget.gameObject)
-            {
-                OnCollideTargetCallBack.Invoke(this);
             }
         }
     }

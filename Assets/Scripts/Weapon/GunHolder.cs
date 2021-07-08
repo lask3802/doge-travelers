@@ -5,7 +5,7 @@ namespace UnityTemplateProjects.Weapon
     public class GunHolder : MonoBehaviour
     {
         public SimpleBullet Bullet;
-        public float FireSpeed = 15000;
+        private float FireSpeed = 15000;
 
         public AudioSource AudioSource;
         
