@@ -5407,7 +5407,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 1146, y: 677}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &523213030
@@ -5438,7 +5438,7 @@ MonoBehaviour:
   AutoHideAfterShow: 0
   AutoHideAfterShowDelay: 3
   AutoSelectButtonAfterShow: 0
-  BehaviorAtStart: 0
+  BehaviorAtStart: 1
   CustomStartAnchoredPosition: {x: 0, y: 0, z: 0}
   DeselectAnyButtonSelectedOnHide: 0
   DeselectAnyButtonSelectedOnShow: 0
@@ -6462,7 +6462,7 @@ GameObject:
   - component: {fileID: 587370314}
   m_Layer: 0
   m_Name: MasterCanvas
-  m_TagString: Untagged
+  m_TagString: MasterCanvas
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6807,7 +6807,7 @@ MonoBehaviour:
   AutoHideAfterShow: 0
   AutoHideAfterShowDelay: 3
   AutoSelectButtonAfterShow: 0
-  BehaviorAtStart: 0
+  BehaviorAtStart: 1
   CustomStartAnchoredPosition: {x: 0, y: 0, z: 0}
   DeselectAnyButtonSelectedOnHide: 0
   DeselectAnyButtonSelectedOnShow: 0
@@ -7628,7 +7628,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -432, y: 586}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &901591110
@@ -7689,7 +7689,7 @@ MonoBehaviour:
   AutoHideAfterShow: 0
   AutoHideAfterShowDelay: 3
   AutoSelectButtonAfterShow: 0
-  BehaviorAtStart: 0
+  BehaviorAtStart: 1
   CustomStartAnchoredPosition: {x: 0, y: 0, z: 0}
   DeselectAnyButtonSelectedOnHide: 0
   DeselectAnyButtonSelectedOnShow: 0
@@ -8419,7 +8419,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1350171578}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -8897,6 +8897,7 @@ GameObject:
   - component: {fileID: 1350171581}
   - component: {fileID: 1350171580}
   - component: {fileID: 1350171579}
+  - component: {fileID: 1350171585}
   m_Layer: 0
   m_Name: View - Main Menu
   m_TagString: Untagged
@@ -8915,15 +8916,15 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 914245006}
   - {fileID: 1719951311}
   - {fileID: 1530638638}
-  - {fileID: 914245006}
   m_Father: {fileID: 587370318}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 268, y: 677}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1350171579
@@ -8984,7 +8985,7 @@ MonoBehaviour:
   AutoHideAfterShow: 0
   AutoHideAfterShowDelay: 3
   AutoSelectButtonAfterShow: 0
-  BehaviorAtStart: 0
+  BehaviorAtStart: 1
   CustomStartAnchoredPosition: {x: 0, y: 0, z: 0}
   DeselectAnyButtonSelectedOnHide: 0
   DeselectAnyButtonSelectedOnShow: 0
@@ -9416,52 +9417,43 @@ MonoBehaviour:
         LoopType: 1
         Direction: 2
         CustomPosition: {x: 0, y: 0, z: 0}
-        EaseType: 1
-        Ease: 31
+        EaseType: 0
+        Ease: 18
         AnimationCurve:
           serializedVersion: 2
           m_Curve:
           - serializedVersion: 3
             time: 0
             value: 0
-            inSlope: 1
-            outSlope: 1
+            inSlope: 0
+            outSlope: 0
             tangentMode: 0
             weightedMode: 0
             inWeight: 0.33333334
             outWeight: 0.33333334
           - serializedVersion: 3
-            time: 0.2740231
-            value: 1.1039374
-            inSlope: 0.9998679
-            outSlope: 0.9998679
+            time: 0.22816835
+            value: 1.2861733
+            inSlope: -0.08982998
+            outSlope: -0.08982998
             tangentMode: 0
             weightedMode: 0
             inWeight: 0.33333334
             outWeight: 0.33333334
           - serializedVersion: 3
-            time: 0.5163517
-            value: 0.7036603
-            inSlope: -2.103448
-            outSlope: -2.103448
+            time: 0.6220915
+            value: 1.1371747
+            inSlope: 0.94856524
+            outSlope: 0.94856524
             tangentMode: 0
             weightedMode: 0
             inWeight: 0.33333334
             outWeight: 0.33333334
           - serializedVersion: 3
-            time: 0.7044877
-            value: 1.0318286
-            inSlope: -0.086426735
-            outSlope: -0.086426735
-            tangentMode: 0
-            weightedMode: 0
-            inWeight: 0.33333334
-            outWeight: 0.33333334
-          - serializedVersion: 3
-            time: 0.8692011
-            value: 0.83315283
-            inSlope: -3.053546
-            outSlope: -3.053546
+            time: 0.72613853
+            value: 0.73627746
+            inSlope: -1.5867386
+            outSlope: -1.5867386
             tangentMode: 0
             weightedMode: 0
             inWeight: 0.33333334
@@ -9469,8 +9461,8 @@ MonoBehaviour:
           - serializedVersion: 3
             time: 1
             value: 1
-            inSlope: 1
-            outSlope: 1
+            inSlope: 2
+            outSlope: 2
             tangentMode: 0
             weightedMode: 0
             inWeight: 0.33333334
@@ -9479,11 +9471,11 @@ MonoBehaviour:
           m_PostInfinity: 2
           m_RotationOrder: 4
         StartDelay: 0
-        Duration: 0.4
+        Duration: 2.4
       Rotate:
         AnimationType: 1
         Enabled: 0
-        From: {x: 0, y: 0, z: 30}
+        From: {x: 0, y: 0, z: 15}
         To: {x: 0, y: 0, z: 0}
         By: {x: 0, y: 0, z: 0}
         UseCustomFromAndTo: 0
@@ -9492,7 +9484,7 @@ MonoBehaviour:
         NumberOfLoops: -1
         LoopType: 1
         RotateMode: 0
-        EaseType: 1
+        EaseType: 0
         Ease: 27
         AnimationCurve:
           serializedVersion: 2
@@ -9572,12 +9564,12 @@ MonoBehaviour:
           m_PreInfinity: 2
           m_PostInfinity: 2
           m_RotationOrder: 4
-        StartDelay: 0
-        Duration: 0.4
+        StartDelay: 0.3
+        Duration: 0.45
       Scale:
         AnimationType: 1
         Enabled: 1
-        From: {x: 0.7, y: 0.7, z: 1}
+        From: {x: 0, y: 0, z: 1}
         To: {x: 0, y: 0, z: 0}
         By: {x: 0, y: 0, z: 0}
         UseCustomFromAndTo: 0
@@ -9586,7 +9578,7 @@ MonoBehaviour:
         NumberOfLoops: -1
         LoopType: 1
         EaseType: 0
-        Ease: 26
+        Ease: 27
         AnimationCurve:
           serializedVersion: 2
           m_Curve:
@@ -9639,10 +9631,10 @@ MonoBehaviour:
           m_PostInfinity: 2
           m_RotationOrder: 4
         StartDelay: 0
-        Duration: 0.4
+        Duration: 4.8
       Fade:
         AnimationType: 1
-        Enabled: 1
+        Enabled: 0
         From: 0
         To: 1
         By: 0.5
@@ -9657,8 +9649,8 @@ MonoBehaviour:
           m_PreInfinity: 2
           m_PostInfinity: 2
           m_RotationOrder: 4
-        StartDelay: 0
-        Duration: 0.5
+        StartDelay: 0.2
+        Duration: 0.2
     AutoStartLoopAnimation: 1
     LoadSelectedPresetAtRuntime: 0
     InstantAnimation: 0
@@ -9702,8 +9694,8 @@ MonoBehaviour:
         SoundName: No Sound
         AudioClip: {fileID: 0}
         OutputAudioMixerGroup: {fileID: 0}
-    PresetCategory: Drop
-    PresetName: DropAndBounceFast
+    PresetCategory: Slide
+    PresetName: CardDown
   ShowProgressor: {fileID: 0}
   TargetOrientation: 2
   UpdateHideProgressorOnShow: 0
@@ -9761,6 +9753,20 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!114 &1350171585
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1350171577}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22f8eb3e90304215a38eebe61c55c1c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  StartButton: {fileID: 1146654108350959095}
+  QuitButton: {fileID: 1719951312}
 --- !u!1 &1402180380
 GameObject:
   m_ObjectHideFlags: 0
@@ -9924,6 +9930,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 1146654109076290776, guid: 4a59738535fa7c9449a967920c84fef7, type: 3}
   m_PrefabInstance: {fileID: 1719951310}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1719951312 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1146654109076290758, guid: 4a59738535fa7c9449a967920c84fef7, type: 3}
+  m_PrefabInstance: {fileID: 1719951310}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d12bfc32d0d797428cf0191288caabd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1823502269
 GameObject:
   m_ObjectHideFlags: 0
@@ -9984,12 +10001,12 @@ GameObject:
   - component: {fileID: 1850654438}
   - component: {fileID: 1850654437}
   m_Layer: 0
-  m_Name: Camera
+  m_Name: UICamera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1850654437
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10229,3 +10246,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4a59738535fa7c9449a967920c84fef7, type: 3}
+--- !u!114 &1146654108350959095 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1146654109076290758, guid: 4a59738535fa7c9449a967920c84fef7, type: 3}
+  m_PrefabInstance: {fileID: 1146654108350959094}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d12bfc32d0d797428cf0191288caabd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
