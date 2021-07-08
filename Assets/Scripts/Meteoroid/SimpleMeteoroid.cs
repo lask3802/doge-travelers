@@ -1,22 +1,25 @@
 ﻿using System;
+using EasyButtons;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace UnityTemplateProjects.Meteoroid
 {
     public class SimpleMeteoroid : MonoBehaviour
     {
+        [SerializeField]
+        private GameObject mAsteroidBreakEffect;
+        [SerializeField]
         private Rigidbody mRigidbody;
+        [SerializeField]
+        private AudioSource mExplodeSound;
 
         private MeteoroidTarget mTarget;
         private Vector3 mMovement;
         private float mSpeed;
         
         public event Action<SimpleMeteoroid> OnCollideTargetCallBack = delegate {  };
-        
-        void Awake()
-        {
-            mRigidbody = GetComponent<Rigidbody>();
-        }
+        public event Action<SimpleMeteoroid> OnCollideAnotherMeteoroidCallBack = delegate {  };
 
         public void SetInitPosition(Vector3 initPosition)
         {
@@ -48,19 +51,40 @@ namespace UnityTemplateProjects.Meteoroid
             transform.localScale = new Vector3(size, size, size);
         }
 
-        /// <summary>
-        /// Begin this meteoroid's journey, which is add force(goto target vector * speed) to rigid body
-        /// </summary>
-        public void Fire()
+        public void Fire(System.Random random)
         {
             mRigidbody.AddForce(mMovement * mSpeed);
+            var x = 5 * ((float)random.NextDouble() * 360 - 180);
+            var y = 5 * ((float)random.NextDouble() * 360 - 180);
+            var z = 5 * ((float)random.NextDouble() * 360 - 180);
+            mRigidbody.AddTorque(new Vector3(x, y, z));
+        }
+
+        public void Explode()
+        {
+            var explodeEffect = Instantiate(mAsteroidBreakEffect);
+            explodeEffect.transform.position = transform.position;
+            var particles = explodeEffect.GetComponentsInChildren<ParticleSystem>();
+            foreach (var particle in particles)
+            {
+                particle.transform.localScale = transform.localScale;
+            }
+            explodeEffect.transform.rotation = Random.rotation;
+            explodeEffect.SetActive(true);
+            Destroy(explodeEffect, 3f);
         }
 
         private void OnCollisionEnter(Collision collision)
         {
-            if (collision.gameObject != mTarget.gameObject) return;
-            
-            OnCollideTargetCallBack.Invoke(this);
+            if (collision.gameObject.GetComponent<SimpleMeteoroid>() != null)
+            {
+                OnCollideAnotherMeteoroidCallBack.Invoke(this);
+            }
+
+            if (collision.gameObject == mTarget.gameObject)
+            {
+                OnCollideTargetCallBack.Invoke(this);
+            }
         }
     }
 }

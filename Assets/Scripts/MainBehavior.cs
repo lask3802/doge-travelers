@@ -2,16 +2,19 @@
 using Meteoroid;
 using UniRx;
 using UnityEngine;
+using UnityTemplateProjects.Weapon;
 
 namespace UnityTemplateProjects
 {
     public class MainBehavior : MonoBehaviour
     {
         private MeteoroidPatternController mMeteoroidPatternController;
+        private WeaponManager mWeaponManager;
         
         private void Awake()
         {
             mMeteoroidPatternController = FindObjectOfType<MeteoroidPatternController>();
+            mWeaponManager = FindObjectOfType<WeaponManager>();
             Application.targetFrameRate = 60;
         }
         
@@ -36,6 +39,7 @@ namespace UnityTemplateProjects
         public void Pause()
         {
             mMeteoroidPatternController.PatternPause();
+            mWeaponManager.StopWeapon();
             Time.timeScale = 0;
         }
 
@@ -43,6 +47,7 @@ namespace UnityTemplateProjects
         public void Resume()
         {
             mMeteoroidPatternController.PatternResume();
+            mWeaponManager.RunWeapon();
             Time.timeScale = 1;
         }
 
@@ -50,12 +55,14 @@ namespace UnityTemplateProjects
         public void Stop()
         {
             mMeteoroidPatternController.PatternStop();
+            mWeaponManager.StopWeapon();
         }
 
         [Button]
         public void Play()
         {
             mMeteoroidPatternController.PatternStart(1);
+            mWeaponManager.RunWeapon();
         }
     }
 }

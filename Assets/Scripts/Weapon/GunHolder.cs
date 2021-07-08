@@ -5,8 +5,10 @@ namespace UnityTemplateProjects.Weapon
     public class GunHolder : MonoBehaviour
     {
         public SimpleBullet Bullet;
-        public float FireSpeed = 300;
+        public float FireSpeed = 15000;
 
+        public AudioSource AudioSource;
+        
         private WeaponManager mWeaponManager;
         
         void Awake()
@@ -21,6 +23,7 @@ namespace UnityTemplateProjects.Weapon
             bullet.SetEndPosition(position);
             bullet.SetSpeed(FireSpeed);
             bullet.Fire();
+            AudioSource.Play();
             return bullet;
         }
     }

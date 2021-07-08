@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using EasyButtons;
 using UnityEngine;
 using UnityTemplateProjects.Meteoroid;
 
@@ -11,8 +10,7 @@ namespace UnityTemplateProjects.Weapon
         private List<SimpleBullet> mFiredBullet = new List<SimpleBullet>();
         private MeteoroidManager mMeteoroidManager;
         private GunHolder mGunHolder;
-
-        public Camera DogeCamera;
+        private bool mRunning;
 
         void Awake()
         {
@@ -25,9 +23,18 @@ namespace UnityTemplateProjects.Weapon
             mGunHolder = gunHolder;
         }
 
+        public void RunWeapon()
+        {
+            mRunning = true;
+        }
+
+        public void StopWeapon()
+        {
+            mRunning = false;
+        }
+
         public void GunFire(Vector3 position)
         {
-            Debug.Log("gun shot!");
             var bullet = mGunHolder.FireToTarget(position);
             bullet.OnHitMeteoroidCallback += BulletHitMeteoroid;
             mFiredBullet.Add(bullet);
@@ -35,13 +42,15 @@ namespace UnityTemplateProjects.Weapon
 
         private void BulletHitMeteoroid(SimpleMeteoroid meteoroid, SimpleBullet bullet)
         {
-            mMeteoroidManager.RemoveMeteoroid(meteoroid);
+            mMeteoroidManager.ExplodeMeteoroid(meteoroid);
             mFiredBullet.Remove(bullet);
             Destroy(bullet.gameObject);
         }
         private void Update()
         {
-            var removedCandidate = mFiredBullet.Where(b => b.transform.position.z > 500).ToList();
+            if (!mRunning) return;
+            
+            var removedCandidate = mFiredBullet.Where(b => b.transform.position.z > 300).ToList();
             foreach (var bullet in removedCandidate)
             {
                 mFiredBullet.Remove(bullet);
@@ -50,40 +59,28 @@ namespace UnityTemplateProjects.Weapon
 
             if (Input.GetMouseButtonDown(0))
             {
-                GetTargetFromMouseClick();
-                //DebugFire();
+                var target = GetTargetFromMouseClick();
+                GunFire(target);
             }
         }
 
-        private void GetTargetFromMouseClick()
+        public Vector3 GetTargetFromMouseClick()
         {
-            var ray = DogeCamera.ScreenPointToRay(Input.mousePosition);
+            var camera = Camera.main;
+            
+            var ray = camera.ScreenPointToRay(Input.mousePosition);
         
-            Debug.Log("Try get meteoroid from click");
             var allHits = Physics.RaycastAll(ray);
             foreach (var hit in allHits)
             {
                 var meteoroid = hit.transform.GetComponent<SimpleMeteoroid>();
                 if (meteoroid == null) continue;
-                
-                GunFire(meteoroid.transform.position);
-                break;
+                if (meteoroid.transform.position.z < 5) continue;
+                return meteoroid.transform.position;
             }
-        }
-
-        [Button]
-        public void DebugFire()
-        {
-            var meteoroids = mMeteoroidManager.ExistMeteoroids
-                .Where(m => m.transform.position.z > mGunHolder.transform.position.z).ToList();
-            if (meteoroids.Count == 0)
-            {
-                Debug.Log("no meteoroids");
-            }
-            else
-            {
-                GunFire(meteoroids[0].transform.position);
-            }
+            var mouse = Input.mousePosition;
+            mouse.z = 200;
+            return camera.ScreenToWorldPoint(mouse);
         }
     }
 }
