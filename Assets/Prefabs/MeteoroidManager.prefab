@@ -110,9 +110,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MeteoroidBasic: {fileID: 390711238}
-  FireDuration: 120
-  FireArriveTime: 10
-  FireCount: 1
+  FireDuration: 0
+  FireArriveTime: 0
+  FireCount: 0
 --- !u!114 &6534448419125361501
 MonoBehaviour:
   m_ObjectHideFlags: 0

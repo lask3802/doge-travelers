@@ -55,6 +55,7 @@ namespace Meteoroid
             mFramePassed = 0;
             mMeteoroidManager.RegisterTarget();
             mMeteoroidManager.StartShooting(seed);
+            mMeteoroidManager.SetMeteoroidPattern(mPatternSerialized.Patterns[0]);
             mStopFireFrameCount = (int)mPatternSerialized.Patterns.Last().Time * FramesOneSec;
             mEndGameFrameCount = mStopFireFrameCount + 5 * FramesOneSec;
         }
