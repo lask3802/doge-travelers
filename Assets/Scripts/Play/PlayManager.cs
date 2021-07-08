@@ -9,6 +9,7 @@ using EasyButtons;
 using Meteoroid;
 using UniRx;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityTemplateProjects.Weapon;
 
 public class PlayManager : MonoBehaviour
@@ -33,12 +34,16 @@ public class PlayManager : MonoBehaviour
     public GameObject CharacterRoot;
     public GameObject CharacterPrefab;
     public GameObject Speedline;
+    public UnityEvent OnGameStart;
+    public UnityEvent OnRoundEnd;
+    public UnityEvent OnWinGame;
     public AudioSource Bgm;
     
     private MeteoroidPatternController mMeteoroidPatternController;
     private WeaponManager mWeaponManager;
 
     private List<DogeController> mPreviousDoges;
+    public IReadOnlyList<DogeController> PrevDogeControllers => mPreviousDoges;
     private List<List<DogeCommand>> mAllDogeCommands;
     private List<float> mAllDogeStartX;
     private Vector3 mCurrentPosition;
@@ -99,6 +104,7 @@ public class PlayManager : MonoBehaviour
         mRoundCount++;
         Speedline.SetActive(true);
         Bgm.Play();
+        OnGameStart?.Invoke();
     }
     
     public async UniTaskVoid StopGame()
@@ -119,6 +125,7 @@ public class PlayManager : MonoBehaviour
         if(mRoundCount != 3)
             MainCharacterController.DisableDogeCamera();
         GameProgressManager.Instance.OnRoundEnd(mRoundCount).Forget();
+        OnRoundEnd?.Invoke();
     }
 
     private async UniTask CheckExplodeDoge()
@@ -162,6 +169,7 @@ public class PlayManager : MonoBehaviour
         Speedline.SetActive(false);
         Bgm.Stop();
         GameProgressManager.Instance.OnWinGame(mRoundCount).Forget();
+        OnWinGame?.Invoke();
     }
 
     public void Replay()

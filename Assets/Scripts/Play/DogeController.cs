@@ -30,6 +30,7 @@ public class DogeController:MonoBehaviour
 
     private bool mIsPlaying;
     private bool mIsReplay;
+    public bool IsReplayCompleted => mReplayFrameCount >= mFrameCommands.Count && mFrameCommands.Count>0;
     private int mReplayFrameCount;
 
     private const float SpeedConst = 0.1f;

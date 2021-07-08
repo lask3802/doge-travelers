@@ -695,7 +695,7 @@ ParticleSystem:
     angle: 0
     length: 8.264328
     boxThickness: {x: 0, y: 0, z: 0}
-    radiusThickness: 0.3
+    radiusThickness: 0.2
     donutRadius: 0.2
     m_Position: {x: 0, y: 0, z: 0}
     m_Rotation: {x: 0, y: 0, z: 0}
@@ -778,7 +778,7 @@ ParticleSystem:
     sphericalDirectionAmount: 0
     randomPositionAmount: 0
     radius:
-      value: 18.53
+      value: 97.8
       mode: 0
       spread: 0
       speed:
@@ -5499,7 +5499,7 @@ ParticleSystem:
     angle: 0
     length: 8.264328
     boxThickness: {x: 0, y: 0, z: 0}
-    radiusThickness: 0.4
+    radiusThickness: 0.25
     donutRadius: 0.2
     m_Position: {x: 0, y: 0, z: 0}
     m_Rotation: {x: 0, y: 0, z: 0}
@@ -5582,7 +5582,7 @@ ParticleSystem:
     sphericalDirectionAmount: 0
     randomPositionAmount: 0
     radius:
-      value: 11.9
+      value: 60
       mode: 0
       spread: 0
       speed:
