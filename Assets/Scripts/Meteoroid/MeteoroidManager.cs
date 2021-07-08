@@ -27,9 +27,9 @@ namespace UnityTemplateProjects
 
         private int FireDelay = 6;
         
-        private float FirePlaneLength = 300f;
-        private float FirePlaneHeight = 150f;
-        private float FirePlaneZ = 300f;
+        private float FirePlaneLength = 190f;
+        private float FirePlaneHeight = 100f;
+        private float FirePlaneZ = 200f;
 
         private float PlayerPlaneLength = 10f;
         private float PlayerPlaneHeight = 10f;
@@ -152,7 +152,7 @@ namespace UnityTemplateProjects
             meteoroid.SetEndPosition(new Vector3(x * lengthBlock, y * heightBlock, PlayerPlaneZ));
             
             meteoroid.SetArriveTime(FireArriveTime);
-            meteoroid.SetSize(1);
+            meteoroid.SetSize(0.75f);
             meteoroid.OnCollideTargetCallBack += OnMeteoroidHitTarget;
             meteoroid.OnCollideAnotherMeteoroidCallBack += OnMeteoroidHitAnotherMeteoroid;
                 
