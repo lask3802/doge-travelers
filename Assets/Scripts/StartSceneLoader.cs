@@ -12,7 +12,7 @@ namespace DogeTraveler
     public class StartSceneLoader : MonoBehaviour
     {
         private Scene mIntroScene;
-        private GameObject MasterCanvas;
+        private static GameObject MasterCanvas;
         void Start()
         {
             LoadScenes().Forget();        
