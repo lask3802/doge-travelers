@@ -66,6 +66,26 @@ public class DogeController:MonoBehaviour
         return mFrameCommands;
     }
 
+    public void Pause()
+    {
+        mIsPlaying = false;
+    }
+    
+    public void Resume()
+    {
+        mIsPlaying = true;
+    }
+    
+    public void PauseReplay()
+    {
+        mIsReplay = false;
+    }
+    
+    public void ResumeReplay()
+    {
+        mIsReplay = true;
+    }
+
     public void SetReplay(List<DogeCommand> commands, Vector3 start)
     {
         mFrameCommands = commands;

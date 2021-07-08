@@ -56,6 +56,11 @@ namespace UnityTemplateProjects.Weapon
             mRunning = true;
         }
 
+        public void PauseWeapon()
+        {
+            mRunning = false;
+        }
+
         public void StopWeapon()
         {
             mRunning = false;

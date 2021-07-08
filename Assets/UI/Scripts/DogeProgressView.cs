@@ -1,4 +1,6 @@
+using System;
 using Doozy.Engine.Progress;
+using UniRx;
 using UnityEngine;
 
 namespace DogeTraveler.UI
@@ -16,8 +18,9 @@ namespace DogeTraveler.UI
         // Update is called once per frame
         void Update()
         {
-            Progressor.SetProgress(Progress);
-            Indicator.anchoredPosition = Progress * ProgressBar.rect.height * Vector2.up + Indicator.anchoredPosition*Vector2.right;
+            var progress = GameProgressManager.Instance.GamePlayProgress.Value;
+            Progressor.SetProgress(progress);
+            Indicator.anchoredPosition = progress * ProgressBar.rect.height * Vector2.up + Indicator.anchoredPosition*Vector2.right;
         }
     }
 }

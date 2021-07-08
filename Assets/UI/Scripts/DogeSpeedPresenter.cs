@@ -1,3 +1,4 @@
+using System;
 using UniRx;
 using VContainer.Unity;
 
@@ -16,7 +17,7 @@ namespace DogeTraveler.UI
         public void Tick()
         {
             if (!m_view) return;
-            m_view.SetSpeed(m_speed.GetSpeed());
+            m_view.SetSpeed(GameProgressManager.Instance.GamePlaySpeed.Value);
         }
     }
 }

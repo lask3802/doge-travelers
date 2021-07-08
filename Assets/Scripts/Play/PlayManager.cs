@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
+using DogeTraveler.UI;
 using EasyButtons;
 using Meteoroid;
 using UniRx;
@@ -47,6 +48,10 @@ public class PlayManager : MonoBehaviour
         mAllDogeCommands = new List<List<DogeCommand>>();
         mAllDogeStartX = new List<float>();
         mRoundCount = 0;
+        var playUIView = GameObject.FindWithTag("MasterCanvas").GetComponentInChildren<GamePlayUIView>(true);
+        playUIView.Pause.Button.OnClickAsObservable().Subscribe(_ => Pause()).AddTo(this);
+        var pauseUIView = GameObject.FindWithTag("MasterCanvas").GetComponentInChildren<GamePauseUIView>(true);
+        pauseUIView.Resume.Button.OnClickAsObservable().Subscribe(_ => Resume()).AddTo(this);
 
         mMeteoroidPatternController.ProgressEndAsObservable()
             .Subscribe(_ => WinGame()).AddTo(this);
@@ -84,6 +89,22 @@ public class PlayManager : MonoBehaviour
         var commands = MainCharacterController.EndGame();
         mPreviousDoges.Add(CreatePreviousDoge(commands, mCurrentPosition));
         GameProgressManager.Instance.OnRoundEnd(mRoundCount).Forget();
+    }
+
+    public void Pause()
+    {
+        mMeteoroidPatternController.PatternPause();
+        MainCharacterController.Pause();
+        mWeaponManager.PauseWeapon();
+        mPreviousDoges.ForEach(c => c.PauseReplay());
+    }
+
+    public void Resume()
+    {
+        mMeteoroidPatternController.PatternResume();
+        MainCharacterController.Resume();
+        mWeaponManager.RunWeapon();
+        mPreviousDoges.ForEach(c => c.ResumeReplay());
     }
 
     public void WinGame()
