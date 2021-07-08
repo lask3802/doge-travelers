@@ -1,6 +1,8 @@
 ﻿
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
 using EasyButtons;
 using Meteoroid;
@@ -29,6 +31,8 @@ public class PlayManager : MonoBehaviour
     public DogeController MainCharacterController;
     public GameObject CharacterRoot;
     public GameObject CharacterPrefab;
+    public GameObject Speedline;
+    
     private MeteoroidPatternController mMeteoroidPatternController;
     private WeaponManager mWeaponManager;
 
@@ -74,16 +78,42 @@ public class PlayManager : MonoBehaviour
         mPreviousDoges.ForEach(c => c.Replay());
         mMeteoroidPatternController.PatternStart(1);
         mRoundCount++;
+        Speedline.SetActive(true);
     }
     
-    public void StopGame()
+    public async UniTaskVoid StopGame()
     {
         mMeteoroidPatternController.PatternStop();
         mWeaponManager.StopWeapon();
+        Speedline.SetActive(false);
+        mPreviousDoges.ForEach(c => c.StopPlay());
+        MainCharacterController.StopPlay();
+        
+        await CheckExplodeDoge();
+        
         mPreviousDoges.ForEach(c => c.EndGame());
         var commands = MainCharacterController.EndGame();
+        
         mPreviousDoges.Add(CreatePreviousDoge(commands, mCurrentPosition));
         GameProgressManager.Instance.OnRoundEnd(mRoundCount).Forget();
+    }
+
+    private async UniTask CheckExplodeDoge()
+    {
+        if (MainCharacterController.ShouldPlayExplode)
+        {
+            await MainCharacterController.ExplodeCharacter();
+            MainCharacterController.ShouldPlayExplode = false;
+        }
+        else
+        {
+            var doge = mPreviousDoges.FirstOrDefault(d => d.ShouldPlayExplode);
+            if (doge != null)
+            {
+                await doge.ExplodeCharacter();
+                doge.ShouldPlayExplode = false;
+            }
+        }
     }
 
     public void WinGame()

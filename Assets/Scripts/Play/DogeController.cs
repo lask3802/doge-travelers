@@ -26,6 +26,8 @@ public class DogeController:MonoBehaviour
     public GunHolder GunHolder;
     public LaserHolder LaserHolder;
 
+    public bool ShouldPlayExplode;
+
     private bool mIsPlaying;
     private bool mIsReplay;
     private int mReplayFrameCount;
@@ -57,10 +59,14 @@ public class DogeController:MonoBehaviour
         ExplodeEffect.SetActive(false);
     }
 
-    public List<DogeCommand> EndGame()
+    public void StopPlay()
     {
         mIsPlaying = false;
         mIsReplay = false;
+    }
+
+    public List<DogeCommand> EndGame()
+    {
         CharacterBody.SetActive(false);
         if (DogeCamera != null) DogeCamera.gameObject.SetActive(false);
         return mFrameCommands;
@@ -254,7 +260,7 @@ public class DogeController:MonoBehaviour
         return direction;
     }
 
-    public async UniTaskVoid ExplodeCharacter()
+    public async UniTask ExplodeCharacter()
     {
         CharacterBody.SetActive(false);
         ExplodeEffect.SetActive(true); // animation play 2 sec

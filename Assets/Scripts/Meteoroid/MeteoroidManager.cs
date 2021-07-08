@@ -33,7 +33,7 @@ namespace UnityTemplateProjects
 
         private float PlayerPlaneLength = 10f;
         private float PlayerPlaneHeight = 10f;
-        private float PlayerPlaneZ = 0f;
+        private float PlayerPlaneZ = 7f;
 
         private readonly Subject<Unit> mMeteoroidHitTargetSubject = new Subject<Unit>();
 
@@ -86,6 +86,12 @@ namespace UnityTemplateProjects
             Destroy(meteoroid.gameObject);
         }
 
+        public void SilentRemoveMeteoroid(SimpleMeteoroid meteoroid)
+        {
+            mExistMeteoroids.Remove(meteoroid);
+            Destroy(meteoroid.gameObject);
+        }
+
         void Update()
         {
             if (!mRunning) return;
@@ -107,7 +113,7 @@ namespace UnityTemplateProjects
         private void PassPlayerPlaneMeteoroidCheck()
         {
             var removeCandidate = mExistMeteoroids
-                .Where(meteoroid => meteoroid.transform.position.z <= PlayerPlaneZ - 8)
+                .Where(meteoroid => meteoroid.transform.position.z <= PlayerPlaneZ - 10)
                 .ToList();
 
             foreach (var meteoroid in removeCandidate)
@@ -172,7 +178,14 @@ namespace UnityTemplateProjects
         private void OnMeteoroidHitAnotherMeteoroid(SimpleMeteoroid meteoroid)
         {
             meteoroid.OnCollideAnotherMeteoroidCallBack -= OnMeteoroidHitAnotherMeteoroid;
-            ExplodeMeteoroid(meteoroid);
+            if (meteoroid.transform.position.z < PlayerPlaneZ + 20)
+            {
+                SilentRemoveMeteoroid(meteoroid);
+            }
+            else
+            {
+                ExplodeMeteoroid(meteoroid);
+            }
         }
 
         private IEnumerator DelayFire(int delay, SimpleMeteoroid meteoroid)
