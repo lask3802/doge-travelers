@@ -12,6 +12,8 @@ namespace UnityTemplateProjects.Weapon
         private MeteoroidManager mMeteoroidManager;
         private GunHolder mGunHolder;
 
+        public Camera DogeCamera;
+
         void Awake()
         {
             mMeteoroidManager = FindObjectOfType<MeteoroidManager>();
@@ -55,7 +57,7 @@ namespace UnityTemplateProjects.Weapon
 
         private void GetTargetFromMouseClick()
         {
-            var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            var ray = DogeCamera.ScreenPointToRay(Input.mousePosition);
         
             Debug.Log("Try get meteoroid from click");
             var allHits = Physics.RaycastAll(ray);
