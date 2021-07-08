@@ -32,6 +32,7 @@ public class PlayManager : MonoBehaviour
     public GameObject CharacterRoot;
     public GameObject CharacterPrefab;
     public GameObject Speedline;
+    public AudioSource Bgm;
     
     private MeteoroidPatternController mMeteoroidPatternController;
     private WeaponManager mWeaponManager;
@@ -79,6 +80,7 @@ public class PlayManager : MonoBehaviour
         mMeteoroidPatternController.PatternStart(1);
         mRoundCount++;
         Speedline.SetActive(true);
+        Bgm.Play();
     }
     
     public async UniTaskVoid StopGame()
@@ -88,6 +90,7 @@ public class PlayManager : MonoBehaviour
         Speedline.SetActive(false);
         mPreviousDoges.ForEach(c => c.StopPlay());
         MainCharacterController.StopPlay();
+        Bgm.Stop();
         
         await CheckExplodeDoge();
         
