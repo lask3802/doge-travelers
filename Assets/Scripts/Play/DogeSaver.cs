@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
@@ -16,7 +17,7 @@ namespace Play
         void Start()
         {
             CheckSaveDoge(this.GetCancellationTokenOnDestroy()).Forget();
-            
+            CheckClear(this.GetCancellationTokenOnDestroy()).Forget();
         }
 
         async UniTask CheckClear(CancellationToken cts)
@@ -25,6 +26,10 @@ namespace Play
             {
                 await PlayManager.OnRoundEnd.OnInvokeAsync(cts);
                 mMarkSaved.Clear();
+                foreach (var dogeSavedObject in DogeSavedObjects)
+                {
+                    dogeSavedObject.SetActive(false);
+                }
                 mSavedDoges = 0;
             }
         }
@@ -33,24 +38,27 @@ namespace Play
         {
             while (!cts.IsCancellationRequested)
             {
-                await UniTask
-                    .WaitUntil(() => PlayManager.PrevDogeControllers.Any(d => d.IsReplayCompleted), PlayerLoopTiming.Update, cts);
-                foreach (var playManagerPrevDogeController in PlayManager.PrevDogeControllers)
+                while (PlayManager.PrevDogeControllers.Count == 0)
                 {
-                    if (!mMarkSaved.Contains(playManagerPrevDogeController)
-                        && !playManagerPrevDogeController.IsReplayCompleted)
-                    {
-                        mMarkSaved.Add(playManagerPrevDogeController);
-                        SaveDogeAnimation(playManagerPrevDogeController).Forget();
-                    }
+                    await UniTask.NextFrame(cts);
                 }
+                var triggeredIdx = await UniTask.WhenAny(PlayManager.PrevDogeControllers
+                    .Select(c => c.OnReplyCompleted.OnInvokeAsync(cts)));
+                var dogeController = PlayManager.PrevDogeControllers[triggeredIdx];
+
+                if (!mMarkSaved.Contains(dogeController)
+                    && dogeController.IsReplayCompleted)
+                {
+                    mMarkSaved.Add(dogeController);
+                    SaveDogeAnimation(dogeController).Forget();
+                }
+                await UniTask.NextFrame(cts);
             }
         }
 
-        
-
         async UniTask SaveDogeAnimation(DogeController controller)
         {
+            Debug.Log("Saved doge");
             var textPrefab= Instantiate(DogeSaveTextPrefab, null, controller.transform);
             DogeSavedObjects[mSavedDoges++].SetActive(true);
             controller.gameObject.SetActive(false);

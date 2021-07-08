@@ -22,6 +22,7 @@ public class PlayManager : MonoBehaviour
         {
             if (mInstance == null)
             {
+                Application.targetFrameRate = 60;
                 mInstance = FindObjectOfType<PlayManager>();
             }
 
@@ -50,13 +51,17 @@ public class PlayManager : MonoBehaviour
 
     private int mRoundCount;
 
+    void Awake()
+    {
+        mPreviousDoges = new List<DogeController>();
+        mAllDogeCommands = new List<List<DogeCommand>>();
+        mAllDogeStartX = new List<float>();
+    }
     private void Start()
     {
         mMeteoroidPatternController = FindObjectOfType<MeteoroidPatternController>();
         mWeaponManager = FindObjectOfType<WeaponManager>();
-        mPreviousDoges = new List<DogeController>();
-        mAllDogeCommands = new List<List<DogeCommand>>();
-        mAllDogeStartX = new List<float>();
+        
         mRoundCount = 0;
         var playUIView = GameObject.FindWithTag("MasterCanvas").GetComponentInChildren<GamePlayUIView>(true);
         playUIView.Pause.Button.OnClickAsObservable().Subscribe(_ => Pause()).AddTo(this);

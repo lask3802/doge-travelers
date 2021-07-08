@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityTemplateProjects.Weapon;
 
 public class DogeController:MonoBehaviour
@@ -19,7 +20,7 @@ public class DogeController:MonoBehaviour
     public float DogeLowerBound;
     public float DogeLeftBound;
     public float DogeRightBound;
-
+    public UnityEvent OnReplyCompleted;
     private List<DogeCommand> mFrameCommands;
     private Vector3 mStartPos;
     private WeaponManager mWeaponManager;
@@ -202,6 +203,11 @@ public class DogeController:MonoBehaviour
     {
         if (mReplayFrameCount >= mFrameCommands.Count)
         {
+            //Just fire at first completed
+            if (mIsReplay)
+            {
+                OnReplyCompleted?.Invoke();
+            }
             mIsReplay = false;
             return;
         }
