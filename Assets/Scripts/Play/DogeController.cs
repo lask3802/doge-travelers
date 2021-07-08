@@ -62,8 +62,12 @@ public class DogeController:MonoBehaviour
         mIsPlaying = false;
         mIsReplay = false;
         CharacterBody.SetActive(false);
-        if (DogeCamera != null) DogeCamera.gameObject.SetActive(false);
         return mFrameCommands;
+    }
+
+    public void DisableDogeCamera()
+    {
+        if (DogeCamera != null) DogeCamera.gameObject.SetActive(false);
     }
 
     public void Pause()

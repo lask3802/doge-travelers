@@ -52,6 +52,15 @@ public class PlayManager : MonoBehaviour
         playUIView.Pause.Button.OnClickAsObservable().Subscribe(_ => Pause()).AddTo(this);
         var pauseUIView = GameObject.FindWithTag("MasterCanvas").GetComponentInChildren<GamePauseUIView>(true);
         pauseUIView.Resume.Button.OnClickAsObservable().Subscribe(_ => Resume()).AddTo(this);
+        pauseUIView.BackToTitle.Button.OnClickAsObservable()
+            .Subscribe(_ => GameProgressManager.Instance.OnBackToTitle().Forget()).AddTo(this);
+
+        var gameOverUIView = GameObject.FindWithTag("MasterCanvas").GetComponentInChildren<GameOverUIView>(true);
+        gameOverUIView.Retry.Button.OnClickAsObservable()
+            .Subscribe(_ => GameProgressManager.Instance.OnRetryGame().Forget()).AddTo(this);
+        gameOverUIView.BackToTitle.Button.OnClickAsObservable()
+            .Subscribe(_ => GameProgressManager.Instance.OnBackToTitle().Forget()).AddTo(this);
+
 
         mMeteoroidPatternController.ProgressEndAsObservable()
             .Subscribe(_ => WinGame()).AddTo(this);
@@ -88,6 +97,8 @@ public class PlayManager : MonoBehaviour
         mPreviousDoges.ForEach(c => c.EndGame());
         var commands = MainCharacterController.EndGame();
         mPreviousDoges.Add(CreatePreviousDoge(commands, mCurrentPosition));
+        if(mRoundCount != 3)
+            MainCharacterController.DisableDogeCamera();
         GameProgressManager.Instance.OnRoundEnd(mRoundCount).Forget();
     }
 

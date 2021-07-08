@@ -98,7 +98,18 @@ public class GameProgressManager:MonoBehaviour
     public async UniTask OnFailedGame()
     {
         mGameProgressState.Value = GameState.Failed;
-        await SceneManager.LoadSceneAsync("start", LoadSceneMode.Single);
+        GameEventMessage.SendEvent("GameFailed");
+    }
+
+    public async UniTask OnRetryGame()
+    {
+        await SceneManager.LoadSceneAsync("main");
+        mGameProgressState.Value = GameState.Play1;
+    }
+
+    public async UniTask OnBackToTitle()
+    {
+        await SceneManager.LoadSceneAsync("start");
         mGameProgressState.Value = GameState.Start;
     }
 

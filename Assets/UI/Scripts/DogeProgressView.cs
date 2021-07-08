@@ -16,11 +16,15 @@ namespace DogeTraveler.UI
         [Range(0,1f)]
         public float Progress = 0;
         // Update is called once per frame
-        void Update()
+        private void Start()
         {
-            var progress = GameProgressManager.Instance.GamePlayProgress.Value;
-            Progressor.SetProgress(progress);
-            Indicator.anchoredPosition = progress * ProgressBar.rect.height * Vector2.up + Indicator.anchoredPosition*Vector2.right;
+            GameProgressManager.Instance.GamePlayProgress.Subscribe(s =>
+            {
+                Progressor.SetProgress(s);
+                Indicator.anchoredPosition = s * ProgressBar.rect.height * Vector2.up +
+                                             Indicator.anchoredPosition * Vector2.right;
+
+            }).AddTo(this);
         }
     }
 }
