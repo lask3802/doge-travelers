@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityTemplateProjects.Weapon;
 
@@ -9,6 +10,7 @@ public class DogeController:MonoBehaviour
 {
     public Camera DogeCamera;
     public GameObject CharacterBody;
+    public GameObject ExplodeEffect;
     public float CameraUpperBound;
     public float CameraLowerBound;
     public float CameraLeftBound;
@@ -49,6 +51,8 @@ public class DogeController:MonoBehaviour
         ResetPosition(startPos);
         mIsPlaying = true;
         mIsReplay = false;
+        CharacterBody.SetActive(true);
+        ExplodeEffect.SetActive(false);
     }
 
     public List<DogeCommand> EndGame()
@@ -244,5 +248,13 @@ public class DogeController:MonoBehaviour
         if(type.HasFlag(DogeCommandType.Right))
             direction += Vector3.right * SpeedConst;
         return direction;
+    }
+
+    public async UniTaskVoid ExplodeCharacter()
+    {
+        CharacterBody.SetActive(false);
+        ExplodeEffect.SetActive(true); // animation play 2 sec
+        await UniTask.Delay(3100); // audio play 3.1 sec
+        ExplodeEffect.SetActive(false);
     }
 }
