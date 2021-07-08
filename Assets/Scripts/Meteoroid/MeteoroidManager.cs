@@ -81,9 +81,10 @@ namespace UnityTemplateProjects
             RemoveAllMeteoroids();
         }
 
-        public void RemoveMeteoroid(SimpleMeteoroid meteoroid)
+        public void ExplodeMeteoroid(SimpleMeteoroid meteoroid)
         {
             mExistMeteoroids.Remove(meteoroid);
+            meteoroid.Explode();
             Destroy(meteoroid.gameObject);
         }
 
@@ -103,14 +104,6 @@ namespace UnityTemplateProjects
             }
 
             PassPlayerPlaneMeteoroidCheck();
-        }
-
-        private void OnMeteoroidHitTarget(SimpleMeteoroid meteoroid)
-        {
-            meteoroid.OnCollideTargetCallBack -= OnMeteoroidHitTarget;
-            mMeteoroidHitTargetSubject.OnNext(new Unit());
-            mExistMeteoroids.Remove(meteoroid);
-            Destroy(meteoroid.gameObject);
         }
 
         private void PassPlayerPlaneMeteoroidCheck()
@@ -160,6 +153,7 @@ namespace UnityTemplateProjects
             meteoroid.SetSpeed(FireSpeed);
             meteoroid.SetSize(FireMeteoroidSize);
             meteoroid.OnCollideTargetCallBack += OnMeteoroidHitTarget;
+            meteoroid.OnCollideAnotherMeteoroidCallBack += OnMeteoroidHitAnotherMeteoroid;
                 
             mExistMeteoroids.Add(meteoroid);
             if (roundIndex != 0)
@@ -168,10 +162,22 @@ namespace UnityTemplateProjects
             }
             else
             {
-                meteoroid.Fire();
+                meteoroid.Fire(mRandom);
             }
-            meteoroid.Fire();
             return meteoroid;
+        }
+
+        private void OnMeteoroidHitTarget(SimpleMeteoroid meteoroid)
+        {
+            meteoroid.OnCollideTargetCallBack -= OnMeteoroidHitTarget;
+            mMeteoroidHitTargetSubject.OnNext(new Unit());
+            ExplodeMeteoroid(meteoroid);
+        }
+
+        private void OnMeteoroidHitAnotherMeteoroid(SimpleMeteoroid meteoroid)
+        {
+            meteoroid.OnCollideAnotherMeteoroidCallBack -= OnMeteoroidHitAnotherMeteoroid;
+            ExplodeMeteoroid(meteoroid);
         }
 
         private IEnumerator DelayFire(int delay, SimpleMeteoroid meteoroid)
@@ -184,7 +190,7 @@ namespace UnityTemplateProjects
 
             if (meteoroid != null)
             {
-                meteoroid.Fire();
+                meteoroid.Fire(mRandom);
             }
         }
     }

@@ -88,11 +88,11 @@ namespace Meteoroid
             else
             {
 
-                var speed = FrameToSecFloor(mFramePassed) / 30 + 11;
+                var speed = mFramePassed / 600f + 11;
             
                 mMeteoroidManager.SetMeteoroidPattern(new MeteoroidPattern
                 {
-                    FireCount = FrameToSecFloor(mFramePassed) / 70 + 2,
+                    FireCount = FrameToSecFloor(mFramePassed) / 70 + 3,
                     FireSpeed = speed,
                     FireDuration = 2 * 60 - (FrameToSecFloor(mFramePassed) / 50) * 30,
                     FireSize = 1.5f
