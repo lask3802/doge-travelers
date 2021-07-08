@@ -16,5 +16,8 @@ public enum DogeCommandType
     Down = 2,
     Left = 4,
     Right = 8,
-    Shoot = 16
+    Shoot = 16,
+    Laser = 32,
+    LaserBegin = 64,
+    LaserEnd = 128
 }

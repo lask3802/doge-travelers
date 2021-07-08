@@ -22,6 +22,7 @@ public class DogeController:MonoBehaviour
     private Vector3 mStartPos;
     private WeaponManager mWeaponManager;
     public GunHolder GunHolder;
+    public LaserHolder LaserHolder;
 
     private bool mIsPlaying;
     private bool mIsReplay;
@@ -127,6 +128,37 @@ public class DogeController:MonoBehaviour
         };
     }
 
+    public void RecordLaserBegin()
+    {
+        if (mIsReplay) return;
+        var index = mFrameCommands.Count - 1;
+        mFrameCommands[index] = new DogeCommand
+        {
+            Type = mFrameCommands[index].Type | DogeCommandType.LaserBegin,
+        };
+    }
+
+    public void RecordLaserFire(Vector3 vector)
+    {
+        if (mIsReplay) return;
+        var index = mFrameCommands.Count - 1;
+        mFrameCommands[index] = new DogeCommand
+        {
+            Type = mFrameCommands[index].Type | DogeCommandType.Laser,
+            ShootEndPoint = vector
+        };
+    }
+
+    public void RecordLaserEnd()
+    {
+        if (mIsReplay) return;
+        var index = mFrameCommands.Count - 1;
+        mFrameCommands[index] = new DogeCommand
+        {
+            Type = mFrameCommands[index].Type | DogeCommandType.LaserEnd,
+        };
+    }
+
     private void ReplayUpdate()
     {
         if (mReplayFrameCount >= mFrameCommands.Count)
@@ -142,6 +174,25 @@ public class DogeController:MonoBehaviour
         {
             mWeaponManager.RegisterGunHolder(GunHolder);
             mWeaponManager.GunFire(command.ShootEndPoint);
+        }
+
+        if (command.Type.HasFlag(DogeCommandType.Laser))
+        {
+            mWeaponManager.RegisterLaserHolder(LaserHolder);
+            mWeaponManager.LaserFire(command.ShootEndPoint);
+        }
+
+        if (command.Type.HasFlag(DogeCommandType.LaserBegin))
+        {
+            mWeaponManager.RegisterLaserHolder(LaserHolder);
+            mWeaponManager.LaserBegin();
+        }
+
+        if (command.Type.HasFlag(DogeCommandType.LaserEnd))
+        {
+            
+            mWeaponManager.RegisterLaserHolder(LaserHolder);
+            mWeaponManager.LaserEnd();
         }
             
 
