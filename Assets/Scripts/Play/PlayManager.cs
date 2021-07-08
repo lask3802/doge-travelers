@@ -65,6 +65,10 @@ public class PlayManager : MonoBehaviour
             .Subscribe(_ => GameProgressManager.Instance.OnRetryGame().Forget()).AddTo(this);
         gameOverUIView.BackToTitle.Button.OnClickAsObservable()
             .Subscribe(_ => GameProgressManager.Instance.OnBackToTitle().Forget()).AddTo(this);
+        
+        var gameClearUIView = GameObject.FindWithTag("MasterCanvas").GetComponentInChildren<GameClearUIView>(true);
+        gameClearUIView.BackToTitle.Button.OnClickAsObservable()
+            .Subscribe(_ => GameProgressManager.Instance.OnBackToTitle().Forget()).AddTo(this);
 
 
         mMeteoroidPatternController.ProgressEndAsObservable()

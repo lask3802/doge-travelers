@@ -6,23 +6,26 @@ using UnityEngine;
 using UnityEngine.Playables;
 using UnityEngine.SceneManagement;
 
-public class GameProgressManager:MonoBehaviour
+public class GameProgressManager : MonoBehaviour
 {
     #region Singleton
+
     public static GameProgressManager Instance => mInstance;
 
     private static GameProgressManager mInstance;
-    
+
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
     static void RuntimeInit()
     {
+        Application.targetFrameRate = 60;
         if (FindObjectOfType<GameProgressManager>() != null)
             return;
 
-        var go = new GameObject { name = "[GameProgressManager]" };
+        var go = new GameObject {name = "[GameProgressManager]"};
         mInstance = go.AddComponent<GameProgressManager>();
         DontDestroyOnLoad(go);
     }
+
     #endregion
 
     public IReadOnlyReactiveProperty<GameState> GameProgressState => mGameProgressState;
@@ -90,11 +93,11 @@ public class GameProgressManager:MonoBehaviour
     public async UniTask OnWinGame(int round)
     {
         mGameProgressState.Value = GameState.Win;
-        await RunCutSceneAsync("game_clear");
-        await SceneManager.LoadSceneAsync("start", LoadSceneMode.Single);
-        mGameProgressState.Value = GameState.Start;
+        GameEventMessage.SendEvent("GameClear");
+        await RunClearSceneAsync();
+        GameEventMessage.SendEvent("LoadClearUI");
     }
-    
+
     public async UniTask OnFailedGame()
     {
         mGameProgressState.Value = GameState.Failed;
@@ -118,10 +121,20 @@ public class GameProgressManager:MonoBehaviour
         await SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive);
         var director = FindObjectOfType<PlayableDirector>();
         director.Play();
-        await UniTask.Delay(TimeSpan.FromSeconds(director.duration) );
+        await UniTask.Delay(TimeSpan.FromSeconds(director.duration));
         //await UniTask.WaitUntil(()=>director.state != PlayState.Playing, PlayerLoopTiming.Update, director.GetCancellationTokenOnDestroy());
         Debug.Log($"{sceneName} Director play done");
         await SceneManager.UnloadSceneAsync(sceneName);
+    }
+
+    private async UniTask RunClearSceneAsync()
+    {
+        await SceneManager.LoadSceneAsync("game_clear", LoadSceneMode.Additive);
+        var director = FindObjectOfType<PlayableDirector>();
+        director.Play();
+        await UniTask.Delay(TimeSpan.FromSeconds(director.duration));
+        //await UniTask.WaitUntil(()=>director.state != PlayState.Playing, PlayerLoopTiming.Update, director.GetCancellationTokenOnDestroy());
+        Debug.Log($"{"game_clear"} Director play done");
     }
 }
 
