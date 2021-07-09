@@ -3,6 +3,9 @@
 
 1st Noxy Game in house game jam 2021/7/6 4pm ~ 2021/7/9 4pm (72 hours)
 
+[Download Windows Version!] (https://github.com/lask3802/doge-travelers/releases/download/v0.1/doge_travelers_standalone_rc.zip)  
+[Web Version (For PC or Mac)] (https://doge-travelers.web.app/)
+
 ## Introduction
 Doge Traveler is coming home from the moon to the Doge Star! 
 However, many asteroids blocked Doge Traveler's way. 
