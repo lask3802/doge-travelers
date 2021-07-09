@@ -680,7 +680,7 @@ MonoBehaviour:
   m_version: 1
   m_description: 
   m_id: 4d8e3bc0-f564-41a7-96be-a28140ce0447
-  m_lastModified: 132702455958047546
+  m_lastModified: 132702860378936482
 --- !u!114 &440946643520939368
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1162,13 +1162,16 @@ MonoBehaviour:
   m_id: aa180e67-90e1-424a-bb61-ca0a1cca43c9
   m_name: Round End
   m_notes: 
-  m_onEnterShowViews: []
-  m_onEnterHideViews: []
-  m_onExitShowViews:
+  m_onEnterShowViews:
   - Category: DogeTraveler
-    InstantAction: 0
-    Name: Game Play
-  m_onExitHideViews: []
+    InstantAction: 1
+    Name: Intro
+  m_onEnterHideViews: []
+  m_onExitShowViews: []
+  m_onExitHideViews:
+  - Category: DogeTraveler
+    InstantAction: 1
+    Name: Intro
 --- !u!114 &1725093391055098540
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1529,7 +1532,7 @@ MonoBehaviour:
   m_onExitShowViews: []
   m_onExitHideViews:
   - Category: DogeTraveler
-    InstantAction: 0
+    InstantAction: 1
     Name: Game Play
 --- !u!114 &4015780637286303794
 MonoBehaviour:
@@ -2352,10 +2355,16 @@ MonoBehaviour:
   m_id: 1647b5a0-ff48-4382-ac22-99086f171f36
   m_name: Game Start Event Listener
   m_notes: 
-  m_onEnterShowViews: []
+  m_onEnterShowViews:
+  - Category: DogeTraveler
+    InstantAction: 1
+    Name: Intro
   m_onEnterHideViews: []
   m_onExitShowViews: []
-  m_onExitHideViews: []
+  m_onExitHideViews:
+  - Category: DogeTraveler
+    InstantAction: 1
+    Name: Intro
 --- !u!114 &8257659793737844003
 MonoBehaviour:
   m_ObjectHideFlags: 1

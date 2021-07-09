@@ -36,6 +36,7 @@ public class GameProgressManager : MonoBehaviour
     private ReactiveProperty<float> mGamePlaySpeed;
     private ReactiveProperty<float> mGamePlayProgress;
     private int mRound;
+    private UniTaskCompletionSource mIntroTcs;
 
     private void Awake()
     {
@@ -116,12 +117,22 @@ public class GameProgressManager : MonoBehaviour
         mGameProgressState.Value = GameState.Start;
     }
 
+    public void OnIntroSkip()
+    {
+        if (mIntroTcs != null && mIntroTcs.UnsafeGetStatus() == UniTaskStatus.Pending)
+            mIntroTcs.TrySetResult();
+    }
+
     private async UniTask RunCutSceneAsync(string sceneName)
     {
+        mIntroTcs = new UniTaskCompletionSource();
         await SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive);
         var director = FindObjectOfType<PlayableDirector>();
         director.Play();
-        await UniTask.Delay(TimeSpan.FromSeconds(director.duration));
+        var disposable = UniTask.Delay(TimeSpan.FromSeconds(director.duration)).ToObservable()
+            .Subscribe(_ => mIntroTcs.TrySetResult());
+        await mIntroTcs.Task;
+        disposable.Dispose();
         //await UniTask.WaitUntil(()=>director.state != PlayState.Playing, PlayerLoopTiming.Update, director.GetCancellationTokenOnDestroy());
         Debug.Log($"{sceneName} Director play done");
         await SceneManager.UnloadSceneAsync(sceneName);

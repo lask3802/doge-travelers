@@ -1,7 +1,9 @@
+using System;
 using Cysharp.Threading.Tasks;
 using DogeTraveler.UI;
 using Doozy.Engine;
 using Doozy.Engine.UI;
+using UniRx;
 using UnityEngine;
 using UnityEngine.Playables;
 using UnityEngine.SceneManagement;
@@ -13,9 +15,10 @@ namespace DogeTraveler
     {
         private Scene mIntroScene;
         private static GameObject MasterCanvas;
+        private UniTaskCompletionSource mIntroTcs;
         void Start()
         {
-            LoadScenes().Forget();        
+            LoadScenes().Forget();
         }
 
         async UniTask LoadScenes()
@@ -30,6 +33,10 @@ namespace DogeTraveler
             var mainMenuView = MasterCanvas.GetComponentInChildren<MainMenuView>(true);
             ListenStartButton(mainMenuView.StartButton).Forget();
             //GameObject.FindWithTag("MainCamera").SetActive(false);
+            var introUIView = GameObject.FindWithTag("MasterCanvas").GetComponentInChildren<IntroSkipView>(true);
+            introUIView.Skip.Button.OnClickAsObservable()
+                .Subscribe(_ => OnIntroSkip()).AddTo(this);
+
             
             await SceneManager.LoadSceneAsync("intro_1", LoadSceneMode.Additive);
             mIntroScene = SceneManager.GetSceneByName("intro_1");
@@ -37,17 +44,25 @@ namespace DogeTraveler
 
         private async UniTask ListenStartButton(UIButton button)
         {
+            mIntroTcs = new UniTaskCompletionSource();
             GameProgressManager.Instance.OnStartClick();
             await button.Button.OnClickAsync();
             var director = FindObjectOfType<PlayableDirector>();
             director.Play();
-            await UniTask.WaitUntil(()=>director.state != PlayState.Playing, PlayerLoopTiming.Update, director.GetCancellationTokenOnDestroy());
+            var disposable = UniTask.Delay(TimeSpan.FromSeconds(director.duration)).ToObservable()
+                .Subscribe(_ => mIntroTcs.TrySetResult());
+            await mIntroTcs.Task;
+            disposable.Dispose();            
             await SceneManager.LoadSceneAsync("main");
             GameProgressManager.Instance.OnStartIntroEnd();
             GameEventMessage.SendEvent("GamePlayReady");
         } 
         
-       
+        private void OnIntroSkip()
+        {
+            if (mIntroTcs != null && mIntroTcs.UnsafeGetStatus() == UniTaskStatus.Pending)
+                mIntroTcs.TrySetResult();
+        }
         
         
 
