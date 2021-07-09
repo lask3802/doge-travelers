@@ -3302,7 +3302,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 82.5, y: 36.3193}
+  m_AnchoredPosition: {x: 82.5, y: 434.87726}
   m_SizeDelta: {x: 135, y: 84}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &319946456
@@ -3455,7 +3455,7 @@ MonoBehaviour:
   m_minValue: 0
   m_maxValue: 1
   m_wholeNumbers: 0
-  m_currentValue: 0.08342342
+  m_currentValue: 0.9988889
 --- !u!1 &523213027
 GameObject:
   m_ObjectHideFlags: 0
@@ -7775,7 +7775,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
   m_AnchoredPosition: {x: 0, y: -28}
-  m_SizeDelta: {x: 272.9316, y: 50}
+  m_SizeDelta: {x: 402.8, y: 50}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &1314214036
 MonoBehaviour:
@@ -7797,7 +7797,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Speed: '
+  m_text: 'Speed:  '
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: f5e1bb6b20910d0459b926f0da0fa390, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: cf359558af46dcf41bc32039c9a24380, type: 2}
@@ -7831,7 +7831,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
+  m_HorizontalAlignment: 2
   m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -9784,7 +9784,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.254717, g: 0.254717, b: 0.254717, a: 0.4627451}
+  m_Color: {r: 0.254717, g: 0.254717, b: 0.254717, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
