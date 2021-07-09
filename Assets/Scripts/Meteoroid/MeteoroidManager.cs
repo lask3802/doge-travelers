@@ -154,7 +154,7 @@ namespace UnityTemplateProjects
             meteoroid.SetArriveTime(FireArriveTime);
             meteoroid.SetSize(0.5f);
             meteoroid.OnCollideTargetCallBack += OnMeteoroidHitTarget;
-            meteoroid.OnCollideAnotherMeteoroidCallBack += OnMeteoroidHitAnotherMeteoroid;
+            meteoroid.OnCollideOthersCallBack += OnMeteoroidHitOthers;
                 
             mExistMeteoroids.Add(meteoroid);
             if (roundIndex != 0)
@@ -175,10 +175,10 @@ namespace UnityTemplateProjects
             ExplodeMeteoroid(meteoroid);
         }
 
-        private void OnMeteoroidHitAnotherMeteoroid(SimpleMeteoroid meteoroid)
+        private void OnMeteoroidHitOthers(SimpleMeteoroid meteoroid)
         {
-            meteoroid.OnCollideAnotherMeteoroidCallBack -= OnMeteoroidHitAnotherMeteoroid;
-            if (meteoroid.transform.position.z < PlayerPlaneZ + 20)
+            meteoroid.OnCollideOthersCallBack -= OnMeteoroidHitOthers;
+            if (meteoroid.transform.position.z < PlayerPlaneZ - 5)
             {
                 SilentRemoveMeteoroid(meteoroid);
             }

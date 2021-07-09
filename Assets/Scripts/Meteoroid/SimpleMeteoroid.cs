@@ -19,7 +19,7 @@ namespace UnityTemplateProjects.Meteoroid
         private bool mFired;
         
         public event Action<SimpleMeteoroid> OnCollideTargetCallBack = delegate {  };
-        public event Action<SimpleMeteoroid> OnCollideAnotherMeteoroidCallBack = delegate {  };
+        public event Action<SimpleMeteoroid> OnCollideOthersCallBack = delegate {  };
 
         public void SetInitPosition(Vector3 initPosition)
         {
@@ -80,15 +80,43 @@ namespace UnityTemplateProjects.Meteoroid
 
         private void OnTriggerEnter(Collider other)
         {
-            other.GetComponentInParent<DogeController>().ShouldPlayExplode = true;
-            OnCollideTargetCallBack.Invoke(this);
+            if (other.gameObject.CompareTag("WeaponCollider"))
+            {
+                OnCollideOthersCallBack.Invoke(this);
+            }
+            else
+            {
+                other.GetComponentInParent<DogeController>().ShouldPlayExplode = true;
+                OnCollideTargetCallBack.Invoke(this);
+            }
+        }
+
+        private void OnTriggerStay(Collider other)
+        {
+            if (other.gameObject.CompareTag("WeaponCollider"))
+            {
+                OnCollideOthersCallBack.Invoke(this);
+            }
+            else
+            {
+                other.GetComponentInParent<DogeController>().ShouldPlayExplode = true;
+                OnCollideTargetCallBack.Invoke(this);
+            }
         }
 
         private void OnCollisionEnter(Collision collision)
         {
-            if (collision.gameObject.GetComponent<SimpleMeteoroid>() != null)
+            if (collision.gameObject.CompareTag("Meteoroid") || collision.gameObject.CompareTag("WeaponCollider"))
             {
-                OnCollideAnotherMeteoroidCallBack.Invoke(this);
+                OnCollideOthersCallBack.Invoke(this);
+            }
+        }
+
+        private void OnCollisionStay(Collision collision)
+        {
+            if (collision.gameObject.CompareTag("Meteoroid") || collision.gameObject.CompareTag("WeaponCollider"))
+            {
+                OnCollideOthersCallBack.Invoke(this);
             }
         }
     }

@@ -1,12 +1,13 @@
 ﻿using UnityEngine;
-using UnityTemplateProjects.Meteoroid;
 
 namespace UnityTemplateProjects.Weapon
 {
     public class LaserHolder : MonoBehaviour
     {
         public AudioSource AudioSource;
-        public LineRenderer LineRenderer;
+        
+        public GameObject LaserVisual;
+        public GameObject Laser;
         
         private WeaponManager mWeaponManager;
         private DogeController mDogeController;
@@ -21,20 +22,23 @@ namespace UnityTemplateProjects.Weapon
 
         public void LaserBegin()
         {
-            LineRenderer.gameObject.SetActive(true);
+            LaserVisual.SetActive(true);
+            Laser.SetActive(true);
             AudioSource.Play();
             mDogeController.RecordLaserBegin();
         }
 
         public void LaserEnd()
         {
-            LineRenderer.gameObject.SetActive(false);
+            LaserVisual.SetActive(false);
+            Laser.SetActive(false);
             AudioSource.Stop();
             mDogeController.RecordLaserEnd();
         }
 
         public void FireToTarget(Vector3 position)
         {
+            /*
             var positionThis = transform.position;
             var ray = new Ray(positionThis, position - positionThis);
             var allHits = Physics.RaycastAll(ray);
@@ -45,6 +49,9 @@ namespace UnityTemplateProjects.Weapon
                 mMeteoroidManager.ExplodeMeteoroid(meteoroid);
             }
             LineRenderer.SetPosition(1, position - positionThis);
+            */
+            // let physics collider do everything
+            
             mDogeController.RecordLaserFire(position);
         }
     }

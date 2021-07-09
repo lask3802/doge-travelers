@@ -12,7 +12,6 @@ namespace UnityTemplateProjects.Weapon
         public LaserHolder MainLaserHolder;
         
         private List<SimpleBullet> mFiredBullet = new List<SimpleBullet>();
-        private MeteoroidManager mMeteoroidManager;
         private GunHolder mGunHolder;
         private LaserHolder mLaserHolder;
         private bool mRunning;
@@ -26,7 +25,6 @@ namespace UnityTemplateProjects.Weapon
 
         void Awake()
         {
-            mMeteoroidManager = FindObjectOfType<MeteoroidManager>();
             mGunHolder = FindObjectOfType<GunHolder>();
         }
         
@@ -102,9 +100,8 @@ namespace UnityTemplateProjects.Weapon
             mLaserHolder.LaserEnd();
         }
 
-        private void BulletHitMeteoroid(SimpleMeteoroid meteoroid, SimpleBullet bullet)
+        private void BulletHitMeteoroid(SimpleBullet bullet)
         {
-            mMeteoroidManager.ExplodeMeteoroid(meteoroid);
             mFiredBullet.Remove(bullet);
             Destroy(bullet.gameObject);
         }
