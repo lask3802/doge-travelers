@@ -173,6 +173,10 @@ public class PlayManager : MonoBehaviour
         mWeaponManager.StopWeapon();
         Speedline.SetActive(false);
         Bgm.Stop();
+        mPreviousDoges.ForEach(c => c.StopPlay());
+        mPreviousDoges.ForEach(c => c.EndGame());
+        MainCharacterController.StopPlay();
+        MainCharacterController.EndGame();
         GameProgressManager.Instance.OnWinGame(mRoundCount).Forget();
         OnWinGame?.Invoke();
     }

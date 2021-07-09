@@ -9,19 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9e7ba74e91f84f30861169d19f9f20a6, type: 3}
-  m_Name: Meteoroid Pattern Serialized 2
+  m_Script: {fileID: 11500000, guid: edce6ac7506940ceadc2136beda63c9c, type: 3}
+  m_Name: test speed table
   m_EditorClassIdentifier: 
-  Patterns:
+  Elements:
   - Time: 0
-    FireCount: 0
-    FireDuration: 0
-    FireArriveTime: 0
-  - Time: 5
-    FireCount: 1
-    FireDuration: 10
-    FireArriveTime: 3
+    SpeedAtTime: 100000
   - Time: 10
-    FireCount: 0
-    FireDuration: 0
-    FireArriveTime: 0
+    SpeedAtTime: 300000
