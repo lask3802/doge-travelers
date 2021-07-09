@@ -36,7 +36,7 @@ public class PlayManager : MonoBehaviour
     public GameObject CharacterPrefab;
     public GameObject Speedline;
     public UnityEvent OnGameStart;
-    public UnityEvent OnRoundEnd;
+    public UnityEvent<int> OnRoundEnd = new UnityEvent<int>();
     public UnityEvent OnWinGame;
     public AudioSource Bgm;
     
@@ -130,7 +130,7 @@ public class PlayManager : MonoBehaviour
         if(mRoundCount != 3)
             MainCharacterController.DisableDogeCamera();
         GameProgressManager.Instance.OnRoundEnd(mRoundCount).Forget();
-        OnRoundEnd?.Invoke();
+        OnRoundEnd?.Invoke(mRoundCount);
     }
 
     private async UniTask CheckExplodeDoge()
