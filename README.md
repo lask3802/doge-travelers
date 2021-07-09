@@ -1,7 +1,7 @@
 # doge-travelers
 1st Noxy Game in house game jam 2021/7/6 4pm ~ 2021/7/9 4pm (72 hours)
 
-##Introduction
+## Introduction
 Doge Traveler is coming home from the moon to the Doge Star! 
 However, many asteroids blocked Doge Traveler's way. 
 Dodge the asteroids and guide Doge home!
@@ -10,7 +10,7 @@ Move: keyboard (W↑A←S↓D→)
 Bullet: mouse (left key) 
 Laser: mouse (right key)
 
-##Credit
+## Credit
 Programming: Wherx, Turtle, Lask
 3D modeling: Lask
 Music & sound effects: Wen
@@ -19,7 +19,7 @@ UI: Julia, Lask, Turtle
 Special thanks: Doge, and you!
 
 
-##License
+## License
 BGM: KenKenBgm ""Voyager 66"" 
 https://www.youtube.com/watch?v=sVaekQ8B4-w
 Dog head model:  ""Cosmonaut Morse"" by Vanya Mazalevich
