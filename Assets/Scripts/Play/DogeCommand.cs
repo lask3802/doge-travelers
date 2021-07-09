@@ -19,5 +19,7 @@ public enum DogeCommandType
     Shoot = 16,
     Laser = 32,
     LaserBegin = 64,
-    LaserEnd = 128
+    LaserEnd = 128,
+    MoveBegin = 256,
+    MoveEnd = 512
 }

@@ -27,7 +27,7 @@ namespace UnityTemplateProjects
 
         private int FireDelay = 6;
         
-        private float FirePlaneLength = 190f;
+        private float FirePlaneLength = 100f;
         private float FirePlaneHeight = 100f;
         private float FirePlaneZ = 200f;
 

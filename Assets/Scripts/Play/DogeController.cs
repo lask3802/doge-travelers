@@ -26,6 +26,7 @@ public class DogeController:MonoBehaviour
     private WeaponManager mWeaponManager;
     public GunHolder GunHolder;
     public LaserHolder LaserHolder;
+    public AudioSource MoveSoundSource;
 
     public bool ShouldPlayExplode;
 
@@ -33,6 +34,8 @@ public class DogeController:MonoBehaviour
     private bool mIsReplay;
     public bool IsReplayCompleted => mReplayFrameCount >= mFrameCommands.Count && mFrameCommands.Count>0;
     private int mReplayFrameCount;
+
+    private bool mMoving;
 
     private const float SpeedConst = 0.1f;
     
@@ -57,6 +60,8 @@ public class DogeController:MonoBehaviour
         ResetPosition(startPos);
         mIsPlaying = true;
         mIsReplay = false;
+        mMoving = false;
+        MoveSoundSource.Stop();
         CharacterBody.SetActive(true);
         ExplodeEffect.SetActive(false);
     }
@@ -65,11 +70,14 @@ public class DogeController:MonoBehaviour
     {
         mIsPlaying = false;
         mIsReplay = false;
+        mMoving = false;
+        MoveSoundSource.Stop();
     }
 
     public List<DogeCommand> EndGame()
     {
         CharacterBody.SetActive(false);
+        mFrameCommands.Add(new DogeCommand());
         return mFrameCommands;
     }
 
@@ -81,21 +89,37 @@ public class DogeController:MonoBehaviour
     public void Pause()
     {
         mIsPlaying = false;
+        if (mMoving)
+        {
+            MoveSoundSource.Pause();
+        }
     }
     
     public void Resume()
     {
         mIsPlaying = true;
+        if (mMoving)
+        {
+            MoveSoundSource.Play();
+        }
     }
     
     public void PauseReplay()
     {
         mIsReplay = false;
+        if (mMoving)
+        {
+            MoveSoundSource.Pause();
+        }
     }
     
     public void ResumeReplay()
     {
         mIsReplay = true;
+        if (mMoving)
+        {
+            MoveSoundSource.Play();
+        }
     }
 
     public void SetReplay(List<DogeCommand> commands, Vector3 start)
@@ -154,6 +178,19 @@ public class DogeController:MonoBehaviour
                 transformDirection.y < 0 ? DogeCommandType.Down : DogeCommandType.None;
         }
 
+        if (mMoving && !IsAnyMoveKeysHold())
+        {
+            command.Type |= DogeCommandType.MoveEnd;
+            MoveSoundSource.Stop();
+            mMoving = false;
+        }
+        else if(!mMoving && IsAnyMoveKeysHold())
+        {
+            command.Type |= DogeCommandType.MoveBegin;
+            MoveSoundSource.Play();
+            mMoving = true;
+        }
+
         mFrameCommands.Add(command);
     }
 
@@ -209,6 +246,10 @@ public class DogeController:MonoBehaviour
                 OnReplyCompleted?.Invoke();
             }
             mIsReplay = false;
+            if (mMoving)
+            {
+                MoveSoundSource.Stop();
+            }
             return;
         }
             
@@ -235,9 +276,18 @@ public class DogeController:MonoBehaviour
 
         if (command.Type.HasFlag(DogeCommandType.LaserEnd))
         {
-            
             mWeaponManager.RegisterLaserHolder(LaserHolder);
             mWeaponManager.LaserEnd();
+        }
+
+        if (command.Type.HasFlag(DogeCommandType.MoveBegin))
+        {
+            MoveSoundSource.Play();
+        }
+
+        if (command.Type.HasFlag(DogeCommandType.MoveEnd))
+        {
+            MoveSoundSource.Stop();
         }
             
 
@@ -265,6 +315,14 @@ public class DogeController:MonoBehaviour
         }
 
         return direction;
+    }
+
+    private bool IsAnyMoveKeysHold()
+    {
+        return Input.GetKey(KeyCode.W) 
+               || Input.GetKey(KeyCode.S) 
+               || Input.GetKey(KeyCode.A) 
+               || Input.GetKey(KeyCode.D);
     }
 
     private DogeCommandType SerializeDirection(float x, float y)
