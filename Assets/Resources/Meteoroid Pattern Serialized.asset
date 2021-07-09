@@ -50,7 +50,7 @@ MonoBehaviour:
     FireDuration: 0.5
     FireArriveTime: 2
   - Time: 160
-    FireCount: 3
+    FireCount: 5
     FireDuration: 0.5
     FireArriveTime: 2
   - Time: 180
